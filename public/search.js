@@ -1,20 +1,19 @@
-const instantsearch = window.instantsearch;
+var instantsearch = window.instantsearch;
 
-const glitchApp = window.glitchApp;
+var glitchApp = window.glitchApp;
 
-// // create an instantsearch instance with our app id and api key
-// const search = instantsearch({
-//   appId: glitchApp.algolia.app_id,
-//   apiKey: glitchApp.algolia.search_api_key,
-//   indexName: glitchApp.algolia.index_name,
+// create an instantsearch instance with our app id and api key
+// var search = instantsearch({
+//   appId: window.glitchApp.algolia.app_id,
+//   apiKey: window.glitchApp.algolia.search_api_key,
+//   indexName: window.glitchApp.algolia.index_name,
 //   urlSync: true,
 //   searchParameters: {
 //     hitsPerPage: 3
 //   }
 // });
 
-// create an instantsearch instance with our app id and api key
-const search = instantsearch({
+var search = instantsearch({
   appId: 'M438H8L7AG',
   apiKey: '76f893fdbe2b8b87517bcac8a063c150',
   indexName: 'dog-gifs',
@@ -23,6 +22,7 @@ const search = instantsearch({
     hitsPerPage: 3
   }
 });
+
 search.addWidget(
   instantsearch.widgets.searchBox({
     container: '#search-input'
@@ -34,8 +34,22 @@ search.addWidget(
     container: '#hits',
     hitsPerPage: 10,
     templates: {
-      item: document.getElementById('hit-template').innerHTML,
-      empty: "We didn't find any results for the search <em>\"{{query}}\"</em>"
+      empty: `We didn't find any results for the search <em>\"{{query}}\"</em>`,
+      item: function(hit) {
+        try {
+          return `
+            <div class="col-md-4">
+              <p>
+                <span class="hit-text">${hit._highlightResult.title.value}</span>
+              </p>
+              <p><iframe src="${hit.embed_url}" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
+            </div>
+          `;
+        } catch (e) {
+          console.warn("Couldn't render hit", hit, e);
+          return "";
+        }
+      }
     }
   })
 );

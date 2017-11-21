@@ -9,15 +9,15 @@ const dataUrl = 'http://api.giphy.com/v1/gifs/search?q=dogs&api_key=dc6zaTOxFJmz
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + '/views/index.html');
+nunjucks.configure('views', {
+  express: app,
+  noCache: true
 });
 
 // // index route
-// app.get('/', (request, response) => {
-//   response.send(nunjucks.render('index.html', getTemplateContext(request)));
-// });
+app.get('/', (request, response) => {
+  response.send(nunjucks.render('index.html', getTemplateContext(request)));
+});
 
 // abstract api logic, passing in your data url
 algoliaHelper.indexTweets(dataUrl)
