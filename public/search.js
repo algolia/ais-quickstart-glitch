@@ -1,7 +1,5 @@
 var instantsearch = window.instantsearch;
 
-var glitchApp = window.glitchApp;
-
 // create an instantsearch instance with our app id and api key
 // var search = instantsearch({
 //   appId: window.glitchApp.algolia.app_id,
@@ -32,17 +30,17 @@ search.addWidget(
 search.addWidget(
   instantsearch.widgets.hits({
     container: '#hits',
-    hitsPerPage: 10,
+    hitsPerPage: 12,
     templates: {
       empty: `We didn't find any results for the search <em>\"{{query}}\"</em>`,
       item: function(hit) {
         try {
           return `
-            <div class="col-md-4">
-              <p>
-                <span class="hit-text">${hit._highlightResult.title.value}</span>
+            <div class="col-md-4" style="text-align: center;">
+              <p> 
+                <h3 class="hit-text">${hit._highlightResult.title.value}</h3>
               </p>
-              <p><iframe src="${hit.embed_url}" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
+              <iframe src="${hit.embed_url}" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
             </div>
           `;
         } catch (e) {
@@ -55,10 +53,10 @@ search.addWidget(
 );
 
 // comment in for pagination :)
-// search.addWidget(
-//   instantsearch.widgets.pagination({
-//     container: '#pagination'
-//   })
-// );
+search.addWidget(
+  instantsearch.widgets.pagination({
+    container: '#pagination'
+  })
+);
 
 search.start();
