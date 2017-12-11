@@ -11,6 +11,7 @@ var instantsearch = window.instantsearch;
 //   }
 // });
 
+// create an instantsearch instance with our app id and api key
 var search = instantsearch({
   appId: 'M438H8L7AG',
   apiKey: '76f893fdbe2b8b87517bcac8a063c150',
@@ -21,12 +22,14 @@ var search = instantsearch({
   }
 });
 
+// conects the search input on your page to Algolia
 search.addWidget(
   instantsearch.widgets.searchBox({
     container: '#search-input'
   })
 );
 
+// adds the results of your data, in your return statement you can change what you want shown
 search.addWidget(
   instantsearch.widgets.hits({
     container: '#hits',
@@ -52,7 +55,7 @@ search.addWidget(
   })
 );
 
-// comment in for pagination :)
+// adds pagination past the results you set on line 33
 search.addWidget(
   instantsearch.widgets.pagination({
     container: '#pagination'
