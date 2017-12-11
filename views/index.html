@@ -16,39 +16,62 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <div class="row">
-      <div class="col-md-12">
-        <h2>Finding your best dog gifs</h2>
+    
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3" style="text-align: center">Search your best dog gifs</h1>
+        <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fdogsearch.jpg?1510948926400" width="200px" height="200px" style="padding-bottom: 30px;">  
+        <div class="row">
+          <div class="col-md-12">
+            <div class="input-group">
+              <input class="form-control" id="search-input" placeholder="Search ...">
+                <span class="input-group-btn">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                  <button class="btn btn-default" type="submit">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  </button>
+                </span>
+            </div>
+          </div>  
+        </div>
       </div>
     </div>
+        
     <div class="row">
       <div class="col-md-12">
-        <div class="col-md-4">
-        <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fdogsearch.jpg?1510948926400" width="300px" height="300px" style="padding-bottom: 30px;">
-        </div>
-        <div class="col-md-8">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search ... ">
-            <span class="input-group-btn">
-                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-              <button class="btn btn-default" type="submit">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-              </button>
-            </span>
-          </div>
-        </div>
-      </div>  
+        <div id="hits"></div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div id="pagination"></div>
+      </div>
     </div>
     
     <!-- Your web-app is https, so your scripts need to be too -->
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
-            crossorigin="anonymous"></script>
-    <script src="/client.js"></script>
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+    <script src="search.js"></script>
+    
+    <script>
+    // make key server-side information available on the client
+    window.glitchApp = {
+      algolia: {
+        index_name: "{{ algolia.index_name }}",
+        app_id: "{{ algolia.app_id }}",
+        search_api_key: "{{ algolia.search_api_key }}"
+      }
+    };
+  </script>
 
   </body>
 </html>
