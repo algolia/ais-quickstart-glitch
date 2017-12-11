@@ -10,9 +10,9 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "express": "^4.16.2",
     "algoliasearch": "^3.24.6",
     "axios": "^0.17.1",
-    "express": "^4.16.2",
     "nunjucks": "^3.0.1"
   },
   "engines": {

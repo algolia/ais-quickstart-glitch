@@ -18,7 +18,7 @@ function indexTweets(data_url){
 }
 
 function dataToAlgoliaObject(data_points){
-  var algoliaObjects = [];
+	var algoliaObjects = [];
   console.log("looping over data points: " + data_points.length)
   // iterate over data and build the algolia record
   for (var i = 0; i < data_points.length; i++) {
