@@ -19,13 +19,17 @@ app.get('/', (request, response) => {
   response.send(nunjucks.render('index.html', getTemplateContext(request)));
 });
 
+app.get('/search', (request, response) => {
+  response.send(nunjucks.render('search.html', getTemplateContext(request)));
+})
+
 // abstract api logic, passing in your data url
 algoliaHelper.indexTweets(dataUrl)
 
 function getTemplateContext(request) {
   return {
     algolia: {
-      index_name: 'dog-gifs',
+      index_name: process.env.PROJECT_DOMAIN,
       app_id: process.env.ALGOLIA_APP_ID,
       search_api_key: process.env.ALGOLIA_SEARCH_API_KEY
     }

@@ -1,12 +1,3 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
-
-<!-- You might want to try something fancier: -->
-<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
-<!-- pug: https://pugjs.org/ -->
-<!-- haml: http://haml.info/ -->
-<!-- hbs(handlebars): http://handlebarsjs.com/ -->
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -17,40 +8,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Pangolin|Press+Start+2P" rel="stylesheet">
   </head>
   <body>
     
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3" style="text-align: center">Search your best dog gifs</h1>
         <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fdogsearch.jpg?1510948926400" width="200px" height="200px" style="padding-bottom: 30px;">  
-        <div class="row">
-          <div class="col-md-12">
-            <div class="input-group">
-              <input class="form-control" id="search-input" placeholder="Search ...">
-                <span class="input-group-btn">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                  <button class="btn btn-default" type="submit">
-                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                  </button>
-                </span>
-            </div>
-          </div>  
-        </div>
+        <h1 id="welcome">Algolia Quickstart</h1>
+        <p class="lead">Simple application to help you get started with Algolia and Glitch. You can use this as a base for an application you need searching for; or pull some example code!</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="/search" role="button">Check out the demo</a>
+        </p>
       </div>
     </div>
-        
+
     <div class="row">
       <div class="col-md-12">
-        <div id="hits"></div>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="col-md-12">
-        <div id="pagination"></div>
+        <h1 class="display-3" id="remix">Remix Instructions</h1>
+        <h2 style="text-align: center;"> 😎 Welcome! We are so happy you are here! Try Algolia in 4 simple steps 👯‍</h2>
+        <hr></hr>
+        <ul>
+          <li>
+            🔑 <strong>Step 1:</strong> Grab yourself some API keys from <a href="https://www.algolia.com/cc/glitch"> Algolia </a>
+          </li>
+          <li>
+            🎏 <strong>Step 2:</strong> Remix this app <a href="https://glitch.com/edit/#!/remix/instantsearch-quickstart"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="display: inline-block;" /></a>
+          </li>
+          <li>
+            🗃 <strong>Step 3:</strong> Choose your own data source and replace line 6 in <code>server.js</code> here: <a href="https://glitch.com/edit/#!/#{PROJECT_DOMAIN}?path=server.js:6:0">server.js file</a>
+          </li>
+          <li>
+            ✨ <strong>Step 4:</strong> Checkout your page on <a href="/search">/search</a>.
+          </li>
+        </ul>
+        <hr></hr>
+        <h2 style="text-align: center;">🐦 We are so excited to see what you build! Come chat with us on <a href="https://twitter.com/algolia">Twitter</a> 👋 </h2>
       </div>
     </div>
     
@@ -59,19 +53,6 @@
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
-    <script src="search.js"></script>
-    
-    <script>
-    // make key server-side information available on the client
-    window.glitchApp = {
-      algolia: {
-        index_name: "{{ algolia.index_name }}",
-        app_id: "{{ algolia.app_id }}",
-        search_api_key: "{{ algolia.search_api_key }}"
-      }
-    };
-  </script>
 
   </body>
 </html>

@@ -8,7 +8,7 @@ const axios = require('axios');
 const algoliasearch = require('algoliasearch');
 const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_API_KEY);
 // change index name for something that reflects your data source
-const algoliaIndex = algoliaClient.initIndex('dog-gifs');
+const algoliaIndex = algoliaClient.initIndex(process.env.PROJECT_DOMAIN);
 
 function indexTweets(data_url){
   return axios.get(data_url,{})
