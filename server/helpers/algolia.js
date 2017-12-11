@@ -1,4 +1,10 @@
-const axios = require('axios')
+// only do if not running on glitch
+if (!process.env.PROJECT_DOMAIN) {
+  // read environment variables (only necessary locally, not on Glitch)
+  console.log("here")
+  require('dotenv').config();
+}
+const axios = require('axios');
 const algoliasearch = require('algoliasearch');
 const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_API_KEY);
 // change index name for something that reflects your data source
