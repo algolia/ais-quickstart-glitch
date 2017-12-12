@@ -61,17 +61,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
     <script src="search.js"></script>
-    
-    <script>
-    // make key server-side information available on the client
-    window.glitchApp = {
-      algolia: {
-        index_name: "{{ algolia.index_name }}",
-        app_id: "{{ algolia.app_id }}",
-        search_api_key: "{{ algolia.search_api_key }}"
-      }
-    };
-  </script>
-
+    {% include "partials/variables.html" %}
   </body>
 </html>
