@@ -38,27 +38,27 @@
         <hr></hr>
         <ul>
           <li id="step-1">
-            🔑 <strong>Step 1: Pre-requisites</strong>
+            🎏 <strong>Step 1: Remixing</strong> 
             <p class="detailed-steps">
-              Head to <a href="https://www.algolia.com/cc/glitch"> Algolia </a> for API keys, this should take you about 3 minutes to set up. You'll want to copy your <code>admin key</code>, <code>app id</code> and <code> search only key</code>.
-              </br>
-              Once this is complete, add them to your <code>.env file</code> so your application can run.
+              Remix this app <a href="https://glitch.com/edit/#!/remix/instantsearch-quickstart"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="display: inline-block;" /></a>
             </p>
           </li>
           <hr style="width: 60%"></hr>
           <li id="step-2">
-            🎏 <strong>Step 2: Remixing and Indexing</strong> 
+            🔑 <strong>Step 2: Pre-requisites</strong>
             <p class="detailed-steps">
-              Remix this app <a href="https://glitch.com/edit/#!/remix/instantsearch-quickstart"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="display: inline-block;" /></a>
+              Head to <a href="https://www.algolia.com/cc/glitch"> Algolia </a> for API keys, this should take you about 3 minutes to set up. You'll want to copy your <code>admin key</code>, <code>app id</code> and <code> search only key</code>.
               </br>
-              We need to create an index with Algolia with some data we want to search. Head to your <code>server</code> file to start commenting out some code and follow along with instructions.
+              Once this is complete, add them to your <code>.env file</code> so your application can run.
+              </br>
+              We need to create an index with Algolia with some data we want to search. Head to your <code>server.js</code> file at the root of your project to set your data to index. Start by commenting out some code and follow along with instructions.
             </p>
           </li>
           <hr style="width: 60%"></hr>
           <li id="step-3">
-            🗃 <strong>Step 3: Searching and Settings</strong>
+            🗃 <strong>Step 3: Indexing and Settings</strong>
             <p class="detailed-steps">
-              We need to tell Algolia how we want our data to be searched. Head to your <code>server/helpers/algolia.js</code> file and follow along with instructions.
+              We need to tell Algolia how we want our data to be indexed and searched. Head to your <code>server/helpers/algolia.js</code> file and follow along with instructions.
             </p>
           </li>
           <hr style="width: 60%"></hr>
@@ -79,5 +79,7 @@
             integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
             crossorigin="anonymous">
     </script>
+    
+  {% include "partials/variables.html" %}
   </body>
 </html>
