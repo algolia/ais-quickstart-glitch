@@ -65,10 +65,10 @@ function newDomainCheck() {
 
 // check to see if user has added variables to their .env file
 function algoliaClient() {
-  if (process.env.ALGOLIA_APP_ID && 
+  if (process.env.ALGOLIA_APP_ID &&
       process.env.ALGOLIA_ADMIN_API_KEY &&
       process.env.ALGOLIA_SEARCH_API_KEY) {
-    return true
+    return true;
   } else {
     console.warn('One or more Algolia environment variables missing.');
     return null;
