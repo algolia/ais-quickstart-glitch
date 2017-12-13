@@ -1,10 +1,15 @@
 const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks')
-const algoliaHelper = require('./server/helpers/algolia');
-// change URL to your data source you want to search
-const dataUrl = 'http://api.giphy.com/v1/gifs/search?q=dogs&api_key=dc6zaTOxFJmzC'
-// great resource for inspiration: https://github.com/caesar0301/awesome-public-datasets
+
+// ＼(＾▽＾)／ 🔎 Step 4a: Comment in this line: 
+// const algoliaHelper = require('./server/helpers/algolia');
+
+// ＼(＾▽＾)／ 🔎 Step 4b: change from null to a URL to your data source you want to search
+const dataUrl = null
+// great resources for inspiration: 
+// https://github.com/algolia/datasets
+// https://github.com/caesar0301/awesome-public-datasets
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -26,7 +31,9 @@ app.get('/search', (request, response) => {
 })
 
 // abstract api logic, passing in your data url
-algoliaHelper.indexTweets(dataUrl)
+// ＼(＾▽＾)／ 🔎 Step 4c: Comment in this line:
+//algoliaHelper.indexTweets(dataUrl)
+
 
 function getTemplateContext(request) {
   return {
@@ -70,8 +77,7 @@ function algoliaClient() {
 
 // check to see if user has added a data source and sent data to Aloglia for indexing
 function queryDataCheck() {
-  if (algoliaHelper.indexTweets(dataUrl).length != 0){
-    console.log(algoliaHelper.indexTweets(dataUrl).length)
+  if (dataUrl != null){
     return true;
   } else {
     console.warn('Project has not set up indexed data yet.');
