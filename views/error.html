@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InstantSearch - Error</title>
+    <meta name="description" content="The resource is not available or an error has occurred.">
+  </head>
+  <body class="fill-titan">
+    <div class="m600 m-l-r-auto text-center">
+      <h3 class="alert alert-danger">Error: {{ message }}</h3>
+      {% if detail %}
+        <p>{{ detail }}</p>
+      {% endif %}
+    </div>
+    <div class="fixed-footer-container">
+    </div>
+  </body>
+</html>

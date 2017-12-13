@@ -14,6 +14,37 @@ img {
   display: block;
 }
 
+li {
+  list-style: none;
+  font-size: 35px;
+  color: grey;
+}
+body {
+  /*font-family: 'Pangolin', cursive;*/
+}
+
+#remix {
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+}
+
+#welcome {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.detailed-steps {
+  font-size: 20px;
+  font-style: italic;
+}
+
+.current-step {
+  color: black;
+}
+
+.completed-steps {
+  text-decoration: line-through;
+}
+
 /* copied from the instantsearch theme located at
    https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch-theme-algolia.css */
 .ais-pagination {
@@ -28,35 +59,35 @@ img {
   width: 0 auto; 
 }
 
-  .ais-pagination--item {
-    border-radius: 4px;
-    font-size: 14px;
-    text-align: center;
-    width: 28px; 
-  }
-    .ais-pagination--item:hover {
-      background: rgba(39, 81, 175, 0.1); 
-    }
-    .ais-pagination--item__disabled {
-      color: #BBB;
-      opacity: .5;
-      pointer-events: none;
-      visibility: visible; 
-    }
-    .ais-pagination--item__active {
-      background: #3369E7; 
-    }
-      .ais-pagination--item__active .ais-pagination--link {
-        color: #FFFFFF; 
-      }
-  .ais-pagination--link {
-    color: #697782;
-    display: block;
-    text-decoration: none;
-    height: 100%;
-    width: 100%; 
-  }
-    .ais-pagination--link:hover {
-      color: #3369E7;
-      text-decoration: none; 
-    }
+.ais-pagination--item {
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  width: 28px; 
+}
+.ais-pagination--item:hover {
+  background: rgba(39, 81, 175, 0.1); 
+}
+.ais-pagination--item__disabled {
+  color: #BBB;
+  opacity: .5;
+  pointer-events: none;
+  visibility: visible; 
+}
+.ais-pagination--item__active {
+  background: #3369E7; 
+}
+.ais-pagination--item__active .ais-pagination--link {
+  color: #FFFFFF; 
+}
+.ais-pagination--link {
+  color: #697782;
+  display: block;
+  text-decoration: none;
+  height: 100%;
+  width: 100%; 
+}
+.ais-pagination--link:hover {
+  color: #3369E7;
+  text-decoration: none; 
+}
