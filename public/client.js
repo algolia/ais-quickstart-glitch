@@ -20,7 +20,25 @@ $(document).ready(function() {
   if (glitchApp.data.query_data) {    
     document.getElementById("step-3").classList.add('completed-steps');
     document.getElementById("step-3").classList.remove('current-step');
-    document.getElementById("step-4").classList.add('current-step');  
+    document.getElementById("step-4").classList.add('current-step');
+    document.getElementById("step-4-btn").classList.remove('disabled');  
+  }
+
+  // check if data url is not blank
+  if (glitchApp.data.query_data) {    
+    document.getElementById("step-4").classList.add('completed-steps');
+    document.getElementById("step-4-btn").classList.add('disabled');
+    document.getElementById("step-4").classList.remove('current-step');
+    document.getElementById("step-5").classList.add('current-step');
+    document.getElementById("step-5-btn").classList.remove('disabled');
+  }
+  // check if data url is not blank
+  if (glitchApp.data.query_data) {    
+    document.getElementById("step-5").classList.add('completed-steps');
+    document.getElementById("step-5-btn").classList.add('disabled');
+    document.getElementById("step-5").classList.remove('current-step');
+    document.getElementById("step-6").classList.add('current-step');
+    document.getElementById("step-6-btn").classList.remove('disabled');  
   }
   
 });
