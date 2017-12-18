@@ -1,74 +1,98 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Searching all the things</title>
-    <meta name="description" content="A cool search made with Algolia on Glitch">
-    <link id="favicon" rel="icon" href="https://cdn.glitch.com/45e6d35c-2e10-4020-8ahttps://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Ffavicon%20(1).ico?1513040928976" type="image/x-icon">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Pangolin|Press+Start+2P" rel="stylesheet">
-  </head>
-  <body>
-    
-    <div class="jumbotron">
+  {% include "partials/header.html" %}
+  <body class="fill-titan">
+    <!-- <div class="jumbotron"> -->
       <div class="container">
         <div class="col-md-12">
           <div class="col-md-6">
-            <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fdogsearch.jpg?1510948926400" width="200px" height="200px" style="padding-bottom: 30px;">  
+            <span class="spacer8"></span>
+            <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fwhite_search_dog.png?1513298825927" width="200px" height="200px">  
             <h2 id="welcome">Algolia Quickstart</h2>
-            <p class="lead">Create a fully functioning instant search for your website by going through the steps below with Algolia. We will waklk you through getting your api keys, sending data to an Algolia index, creating your search settings and ending with instant search ready to go!</p>
-            <p class="lead">
+            <p class="lead">Algolia is a search API that helps you add a search bar to websites and applications. In this tutorial you will build an Algolia search step-by-step starting with indexing and ending with search. In just 5 minutes, you'll have learned how search works and have a place to search your favorite movies.</p>
+            <!-- <p class="lead">
               <a class="btn btn-primary btn-lg" href="/search" role="button">Check out a live version</a>
-            </p>
+            </p> -->
           </div>
           <div class="col-md-6">
+            <span class="spacer8"></span>
             <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Falgolia-demo.gif?1513044992893" alt="algolia demo">
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
 
     <div class="row">
       <div class="col-md-12">
         <h1 class="display-3" id="remix">Remix Instructions</h1>
-        <h2 style="text-align: center;"> 😎 Welcome! We are so happy you are here! Try Algolia in 4 simple steps 👯‍</h2>
-        <hr></hr>
+        <h2 style="text-align: center;"> 😎 Welcome! We are so happy you are here! Try Algolia in 6 simple steps 👯‍</h2>
+        <hr style="width: 80%"></hr>
         <ul>
           <li id="step-1" class="current-step">
-            🎏 <strong>Step 1: Remixing</strong> 
+            🎏 <strong>Step 1: Remix this app</strong> 
             <p class="detailed-steps">
-              Remix this app <a href="https://glitch.com/edit/#!/remix/instantsearch-quickstart"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="display: inline-block;" /></a>
+              Click this button, which creates your own live copy of this app that you modify and extend right in your browser. <a href="https://glitch.com/edit/#!/remix/instantsearch-quickstart"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="display: inline-block;" /></a>
             </p>
           </li>
           <hr style="width: 60%"></hr>
           <li id="step-2">
-            🔑 <strong>Step 2: Pre-requisites</strong>
+            🔑 <strong>Step 2: Get your Algolia API key</strong>
             <p class="detailed-steps">
-              Head to <a href="https://www.algolia.com/cc/glitch"> Algolia </a> for API keys, this should take you about 3 minutes to set up. You'll want to copy your <code>admin key</code>, <code>app id</code> and <code> search only key</code>.
+              Head to <a href="https://www.algolia.com/cc/glitch"> Algolia </a> for API keys. You'll want to copy your <code>admin key</code>, <code>app id</code> and <code> search only key</code>.
               </br>
               Once this is complete, add them to your <code>.env file</code> so your application can run.
               </br>
-              We need to create an index with Algolia with some data we want to search. Head to your <code>server.js</code> file at the root of your project to set your data to index. Start by commenting out some code and follow along with instructions.
             </p>
           </li>
           <hr style="width: 60%"></hr>
           <li id="step-3">
-            🗃 <strong>Step 3: Indexing and Settings</strong>
+            🗃 <strong>Step 3: Prepare JSON data for Algolia</strong>
             <p class="detailed-steps">
-              We need to tell Algolia how we want our data to be indexed and searched. Head to your <code>server/helpers/algolia.js</code> file and follow along with instructions.
+              We need to create an index with Algolia with some data we want to search. Head to your <code>server.js</code> file at the root of your project to set your data to index. Start by commenting out some code and follow along with instructions.
+              <a href="/check-data" id="step-3-btn" class="btn btn-static-secondary disabled">Check data structure</a>
             </p>
           </li>
           <hr style="width: 60%"></hr>
           <li id="step-4">
-            ✨ <strong>Step 4: Instant Search </strong>
+            ☁️ <strong>Step 4: Upload data to Algolia index</strong>
             <p class="detailed-steps">
-              Make your <a href="/search">/search</a> your homepage and remove this index page!
+              Go to <code>server/helpers/algolia.js</code> and comment in the function calling our data.
+              <a href="/upload-data" id="step-4-btn" class="btn btn-static-secondary">Upload data</a>
+            </p>
+          </li>
+          <hr style="width: 60%"></hr>
+          <li id="step-5">
+            🛠 <strong>Step 5: Configure index to be searched</strong>
+            <p class="detailed-steps">
+              Go to <code>server/helpers/algolia.js</code> and comment in the <code>setSettings</code> function.
+              <a href="/configure-index" id="step-5-btn" class="btn btn-static-secondary">Configure Index</a>
+            </p>
+          </li>
+          <hr style="width: 60%"></hr>
+          <li id="step-6">
+            ✨ <strong>Step 6: Add search widgets to UI</strong>
+            <p class="detailed-steps">
+              Go to <code>public/search.js</code> and comment in the <code>widgets.searchBox</code> and <code>widgets.hits</code>
+              <a href="/search" id="step-6-btn" class="btn btn-static-secondary">View your data</a>
+            </p>
           </li>
         </ul>
-        <hr></hr>
+        <hr style="width: 60%"></hr>
+        <h1 class="display-3" id="remix">Success!</h1>
+        <ul>
+          <li style="text-align: center"> 🖥 You've completed the tutorial, you've learned how to: 🖥</li>
+          <li style="text-align: center">💫 Index data</li>
+          <li style="text-align: center">💪 Configure an index</li>
+          <li style="text-align: center">🔎 Add widgets to your UI</li>
+        </ul>
+        <hr style="width: 60%"></hr>
+        <h1 class="display-3" id="remix">What's next?</h1>
+        <ul>
+          <li style="text-align: center">🕵️ Learn about more options; add more configuration</li>
+          <li style="text-align: center">🙋 Share with us that you completed the tutorial! <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I just finished the tutorial to learn Algolia! 🕵️‍ Remix on @glitch to try it out yourself 🎏">Twitter</a></li>
+          <li style="text-align: center">💜 Check out some of our favorite <a href="https://www.glitch.com/algolia">Glitch</a> apps</li>
+        </ul>
+        <hr style="width: 80%"></hr>
         <h2 style="text-align: center;">🐦 We are so excited to see what you build! Come chat with us on <a href="https://twitter.com/algolia">Twitter</a> 👋 </h2>
       </div>
     </div>

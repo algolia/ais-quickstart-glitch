@@ -2,14 +2,9 @@ const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks')
 
-// ＼(＾▽＾)／ 🔎 Step 4a: Comment in this line: 
-// const algoliaHelper = require('./server/helpers/algolia');
+const algoliaHelper = require('./server/helpers/algolia');
 
-// ＼(＾▽＾)／ 🔎 Step 4b: change from null to a URL to your data source you want to search
-const dataUrl = null
-// great resources for inspiration: 
-// https://github.com/algolia/datasets
-// https://github.com/caesar0301/awesome-public-datasets
+const dataUrl = "https://raw.githubusercontent.com/algolia/datasets/master/movies/actors.json"
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -28,12 +23,28 @@ app.get('/', (request, response) => {
 // create search route
 app.get('/search', (request, response) => {
   response.send(nunjucks.render('search.html', getTemplateContext(request)));
-})
+});
 
-// abstract api logic, passing in your data url
-// ＼(＾▽＾)／ 🔎 Step 4c: Comment in this line:
-//algoliaHelper.indexTweets(dataUrl)
+// check data structure via button in UI and in console logs
+app.get('/check-data', (request, response) => {
+  algoliaHelper.checkDataStructure(dataUrl).then(() => {
+    response.send(nunjucks.render('index.html', getTemplateContext(request)));
+  }).catch((err) => {
+    response.redirect('/');
+  });
+});
 
+// upload data to Algolia via button in UI
+app.get('/upload-data', (request, response) => {
+  algoliaHelper.dataToAlgoliaObject(dataUrl);
+  response.send(nunjucks.render('index.html', getTemplateContext(request)));
+});
+
+// configure index Algolia via button in UI
+app.get('/configure-index', (request, response) => {
+  algoliaHelper.configureAlgoliaIndex();
+  response.send(nunjucks.render('index.html', getTemplateContext(request)));
+});
 
 function getTemplateContext(request) {
   return {
@@ -45,7 +56,9 @@ function getTemplateContext(request) {
     data: {
       algolia_env: algoliaClient(),
       new_domain: newDomainCheck(),
-      query_data: queryDataCheck()
+      data_structure: algoliaDataStructure(),
+      upload_data: algoliaUploadData(),
+      set_settings: algoliaSetSettings()
     }
   };
 }
@@ -55,7 +68,7 @@ function getTemplateContext(request) {
 // check to see if user has remixed the application
 function newDomainCheck() {
   if (process.env.PROJECT_DOMAIN != 'instantsearch-quickstart') {
-    console.log(process.env.PROJECT_DOMAIN)
+    console.log("new domain " + process.env.PROJECT_DOMAIN)
     return true;
   } else {
     console.warn('Project has not been remixed yet.');
@@ -75,12 +88,31 @@ function algoliaClient() {
   }
 }
 
-// check to see if user has added a data source and sent data to Aloglia for indexing
-function queryDataCheck() {
-  if (dataUrl != null){
+// check if user has viewed data structure
+function algoliaDataStructure(){
+  if (process.env.CHECK_DATA_URL) {
     return true;
   } else {
-    console.warn('Project has not set up indexed data yet.');
+    console.warn('Data has not been checked yet');
+    return null;
+  }
+}
+
+// check if 
+function algoliaUploadData(){
+  if (process.env.SEND_DATA_TO_ALGOLIA) {
+    return true;
+  } else {
+    console.warn('Data has not been sent to Algolia yet');
+    return null;
+  }
+}
+
+function algoliaSetSettings(){
+  if (process.env.SET_ALGOLIA_SETTINGS) {
+    return true;
+  } else {
+    console.warn('SetSettings has not been called yet');
     return null;
   }
 }
