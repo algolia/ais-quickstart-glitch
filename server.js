@@ -1,15 +1,13 @@
 const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks')
+const axios = require('axios');
 
 // ＼(＾▽＾)／ 🔎 Step 4a: Comment in this line: 
-// const algoliaHelper = require('./server/helpers/algolia');
+const algoliaHelper = require('./server/helpers/algolia');
 
 // ＼(＾▽＾)／ 🔎 Step 4b: change from null to a URL to your data source you want to search
-const dataUrl = null
-// great resources for inspiration: 
-// https://github.com/algolia/datasets
-// https://github.com/caesar0301/awesome-public-datasets
+const dataUrl = "https://raw.githubusercontent.com/algolia/datasets/master/movies/actors.json"
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -28,12 +26,25 @@ app.get('/', (request, response) => {
 // create search route
 app.get('/search', (request, response) => {
   response.send(nunjucks.render('search.html', getTemplateContext(request)));
-})
+});
 
-// abstract api logic, passing in your data url
-// ＼(＾▽＾)／ 🔎 Step 4c: Comment in this line:
-//algoliaHelper.indexTweets(dataUrl)
+// check data structure
+app.get('/check-data', (request, response) => {
+  algoliaHelper.checkDataStructure(dataUrl)
+  response.redirect('/');
+});
 
+// upload data to Algolia via button in UI
+app.get('/upload-data', (request, response) => {
+  algoliaHelper.dataToAlgoliaObject(dataUrl);
+  response.redirect('/');
+});
+
+// configure index Algolia via button in UI
+app.get('/configure-index', (request, response) => {
+  algoliaHelper.configureAlgoliaIndex();
+  response.redirect('/');
+});
 
 function getTemplateContext(request) {
   return {

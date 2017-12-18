@@ -1,7 +1,6 @@
 // only do if not running on glitch
 if (!process.env.PROJECT_DOMAIN) {
   // read environment variables (only necessary locally, not on Glitch)
-  console.log("here")
   require('dotenv').config();
 }
 
@@ -68,9 +67,13 @@ function dataToAlgoliaObject(data_points){
         // data id to object ID guarantees only one copy of the data in algolia
         // change these variables pending on your data source and how you want to display data
         objectID: data_point.id,
-        id: data_point.id,
+        name: data_point.name,
+        rating: data_point.rating,
+        image_path: data_point.image_path,
+        alternative_name: data_point.alternative_name
+
         // we use the Date.parse and divide by 1000 to get a human readable date to use
-        created_at: Date.parse(data_point.import_datetime) / 1000,
+        //created_at: Date.parse(data_point.import_datetime) / 1000,
       };
       // (~˘▽˘)~ Useful tips
       // we can see our objects being created in the console!
@@ -82,11 +85,12 @@ function dataToAlgoliaObject(data_points){
     algoliaObjects.push(algoliaObject);
   }
   // we need to tell Algolia what and how we want to search our data with setSettings
-  configureAlgoliaIndex()
+  // configureAlgoliaIndex()
 
   // we return our array of usable algoliaObjects at the end of this function
   // this will be what we see in our response that we will then send to algolia
-  return algoliaObjects;
+  // return algoliaObjects;
+  sendDataToAlgolia(algoliaObjects);
 }
 
 // (~˘▽˘)~ Useful tips
@@ -105,18 +109,30 @@ function configureAlgoliaIndex(){
   console.log("Configuring index")
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
   algoliaIndex.setSettings({
-  // searchableAttributes: [
-  //   'title'
-  // ],
-  // customRanking: ['desc(rating)'],
+  searchableAttributes: [
+    'name',
+    'alternative_name'
+  ],
+  customRanking: ['desc(rating)'],
   });
 }
 
 function sendDataToAlgolia(algoliaObjects){
   console.log("Sending data to Algolia" + algoliaObjects)
   algoliaIndex.addObjects(algoliaObjects, function(err, content) {
-    console.log(content);
-  });
+    //console.log(content);
+  })
 }
 
-module.exports = {indexTweets}
+function checkDataStructure(data_url){
+  return axios.get(data_url, {})
+  .then(function(response){
+    console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
+    console.log(response.data[0]);
+  })
+  .catch(function(error) {
+    console.log(error)
+  })
+};
+
+module.exports = {indexTweets, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure}
