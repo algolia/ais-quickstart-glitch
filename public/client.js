@@ -14,40 +14,33 @@ $(document).ready(function() {
     document.getElementById("step-2").classList.add('completed-steps');
     document.getElementById("step-2").classList.remove('current-step');
     document.getElementById("step-3").classList.add('current-step');
+    document.getElementById("step-3-btn").classList.remove('disabled');
   }
 
-  // // step 3: check if data query button has been clicked
-  // document.getElementById('step-3-btn').addEventListener("click", function( event ) {
-  //   document.getElementById("step-3").classList.add('completed-steps');
-  //   document.getElementById("step-3").classList.remove('current-step');
-  //   document.getElementById("step-4").classList.add('current-step');
-  //   document.getElementById("step-4-btn").classList.remove('disabled');  
-  // }, false);
+  // step 3: check if data query button has been shown in console
+  if (glitchApp.data.data_structure) {
+    document.getElementById("step-3").classList.add('completed-steps');
+    document.getElementById("step-3").classList.remove('current-step');
+    document.getElementById("step-4").classList.add('current-step');
+    document.getElementById("step-4-btn").classList.remove('disabled'); 
+  }
 
-  // // Step 3: logged data?
-  // if (glitchApp.data.query_data) {    
-  //   document.getElementById("step-3").classList.add('completed-steps');
-  //   document.getElementById("step-3").classList.remove('current-step');
-  //   document.getElementById("step-4").classList.add('current-step');
-  //   document.getElementById("step-4-btn").classList.remove('disabled');  
-  // }
+  // Step 4: check if upload data has been successful to Algolia
+  if (glitchApp.data.upload_data) {
+    document.getElementById("step-4").classList.add('completed-steps');
+    document.getElementById("step-4-btn").classList.add('disabled');
+    document.getElementById("step-4").classList.remove('current-step');
+    document.getElementById("step-5").classList.add('current-step');
+    document.getElementById("step-5-btn").classList.remove('disabled');
+  }
 
-  // // Step 4: check if upload data button has been clicked && 200 response from Algolia
-  // if (glitchApp.data.query_data) {    
-  //   document.getElementById("step-4").classList.add('completed-steps');
-  //   document.getElementById("step-4-btn").classList.add('disabled');
-  //   document.getElementById("step-4").classList.remove('current-step');
-  //   document.getElementById("step-5").classList.add('current-step');
-  //   document.getElementById("step-5-btn").classList.remove('disabled');
-  // }
-
-  // // Step 5: check if configure index has been clicked && 200 response from Algolia
-  // if (glitchApp.data.query_data) {    
-  //   document.getElementById("step-5").classList.add('completed-steps');
-  //   document.getElementById("step-5-btn").classList.add('disabled');
-  //   document.getElementById("step-5").classList.remove('current-step');
-  //   document.getElementById("step-6").classList.add('current-step');
-  //   document.getElementById("step-6-btn").classList.remove('disabled');  
-  // }
+ // Step 5: check if configure index has been successful to Algolia
+  if (glitchApp.data.set_settings) {
+    document.getElementById("step-5").classList.add('completed-steps');
+    document.getElementById("step-5-btn").classList.add('disabled');
+    document.getElementById("step-5").classList.remove('current-step');
+    document.getElementById("step-6").classList.add('current-step');
+    document.getElementById("step-6-btn").classList.remove('disabled');  
+  }
   
 });

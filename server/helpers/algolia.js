@@ -71,9 +71,6 @@ function dataToAlgoliaObject(data_points){
         rating: data_point.rating,
         image_path: data_point.image_path,
         alternative_name: data_point.alternative_name
-
-        // we use the Date.parse and divide by 1000 to get a human readable date to use
-        //created_at: Date.parse(data_point.import_datetime) / 1000,
       };
       // (~˘▽˘)~ Useful tips
       // we can see our objects being created in the console!
@@ -115,20 +112,27 @@ function configureAlgoliaIndex(){
   ],
   customRanking: ['desc(rating)'],
   });
+  // set settings to true
+  process.env.SET_ALGOLIA_SETTINGS = 1 
 }
 
 function sendDataToAlgolia(algoliaObjects){
   console.log("Sending data to Algolia" + algoliaObjects)
   algoliaIndex.addObjects(algoliaObjects, function(err, content) {
     //console.log(content);
+    process.env.SEND_DATA_TO_ALGOLIA = 1
   })
+   
 }
 
 function checkDataStructure(data_url){
+  console.log("BEFORE " + process.env.CHECK_DATA_URL)
   return axios.get(data_url, {})
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
+    process.env.CHECK_DATA_URL = 1
+    console.log("AFTER " + process.env.CHECK_DATA_URL)
   })
   .catch(function(error) {
     console.log(error)
