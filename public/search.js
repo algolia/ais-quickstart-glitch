@@ -31,9 +31,13 @@ $(document).ready(function() {
             return `
               <div class="col-md-4" style="text-align: center;">
                 <p> 
-                  <h3 class="hit-text">${hit._highlightResult.title.value}</h3>
+                  <h3 class="hit-text">${hit._highlightResult.name.value}</h3>
+                  <img src="https://image.tmdb.org/t/p/w45/${hit.image_path}" height="50" width="50">
                 </p>
-                <iframe src="${hit.embed_url}" width="300" height="300" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+                <p>
+                  Rating: ⭐️ ${hit.rating}
+                </p>
+
               </div>
             `;
           } catch (e) {

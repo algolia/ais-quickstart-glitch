@@ -25,6 +25,7 @@ app.get('/search', (request, response) => {
   response.send(nunjucks.render('search.html', getTemplateContext(request)));
 });
 
+// change to app.post
 // check data structure via button in UI and in console logs
 app.get('/check-data', (request, response) => {
   algoliaHelper.checkDataStructure(dataUrl).then(() => {
@@ -36,7 +37,7 @@ app.get('/check-data', (request, response) => {
 
 // upload data to Algolia via button in UI
 app.get('/upload-data', (request, response) => {
-  algoliaHelper.dataToAlgoliaObject(dataUrl);
+  algoliaHelper.indexTweets(dataUrl);
   response.send(nunjucks.render('index.html', getTemplateContext(request)));
 });
 
@@ -88,33 +89,34 @@ function algoliaClient() {
   }
 }
 
-// check if user has viewed data structure
+// check if user has viewed data structure with helper method (is algolia objects empty)
 function algoliaDataStructure(){
-  if (process.env.CHECK_DATA_URL) {
-    return true;
-  } else {
-    console.warn('Data has not been checked yet');
-    return null;
+  // if (process.env.CHECK_DATA_URL) {
+  //   return true;
+  // } else {
+  //   console.warn('Data has not been checked yet');
+  //   return null;
   }
 }
 
-// check if 
+// check getData
 function algoliaUploadData(){
-  if (process.env.SEND_DATA_TO_ALGOLIA) {
-    return true;
-  } else {
-    console.warn('Data has not been sent to Algolia yet');
-    return null;
-  }
+  // if (process.env.SEND_DATA_TO_ALGOLIA) {
+  //   return true;
+  // } else {
+  //   console.warn('Data has not been sent to Algolia yet');
+  //   return null;
+  // }
 }
 
+// check getSettings
 function algoliaSetSettings(){
-  if (process.env.SET_ALGOLIA_SETTINGS) {
-    return true;
-  } else {
-    console.warn('SetSettings has not been called yet');
-    return null;
-  }
+//   if (process.env.SET_ALGOLIA_SETTINGS) {
+//     return true;
+//   } else {
+//     console.warn('SetSettings has not been called yet');
+//     return null;
+//   }
 }
 
 // listen for requests :)

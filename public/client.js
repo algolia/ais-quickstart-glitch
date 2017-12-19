@@ -17,7 +17,7 @@ $(document).ready(function() {
     document.getElementById("step-3-btn").classList.remove('disabled');
   }
 
-  // step 3: check if data query button has been shown in console
+  // Step 3: check if data query button has been shown in console
   if (glitchApp.data.data_structure) {
     document.getElementById("step-3").classList.add('completed-steps');
     document.getElementById("step-3").classList.remove('current-step');

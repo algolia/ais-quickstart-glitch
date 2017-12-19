@@ -18,7 +18,7 @@ const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGO
 // change within parens of initIndex for something relevant to the data you want to index
 // good examples are 'movie-actors' or 'dog-pictures' or 'my-contacts'
 // you can find this index created under your Algolia dashboard => indices
-const algoliaIndex = algoliaClient.initIndex(process.env.PROJECT_DOMAIN);
+const algoliaIndex = algoliaClient.initIndex("movie-actors");
 
 // (~˘▽˘)~ Useful tips
 // call this function from the server.js to start indexing data
@@ -29,20 +29,13 @@ const algoliaIndex = algoliaClient.initIndex(process.env.PROJECT_DOMAIN);
 function indexTweets(data_url){
   return axios.get(data_url,{})
   .then(function(response){
-      // *＼(＾▽＾)／ 🔎 Step 3a: Comment in this line below
-      // console.log(response.data)
-      // look at your data, are you ready to loop over as is and assign?
-      // do you need to go one step further? call that here before sending to the dataToAlgoliaObject
-    
-      // *＼(＾▽＾)／ 🔎 Step 3c: comment in this line when ready :)
-      // return dataToAlgoliaObject(response.data.data)
+      return dataToAlgoliaObject(response.data)
     })
   .then(function(response){
-     // *＼(＾▽＾)／ 🔎 Step 3d: Comment in this line whe
-     //sendDataToAlgolia(response)
+     sendDataToAlgolia(response)
   })
   .catch(function(error) {
-      console.log(error)
+      console.warn(error)
     })
 }
 
@@ -57,7 +50,7 @@ function indexTweets(data_url){
 
 function dataToAlgoliaObject(data_points){
   var algoliaObjects = [];
-  console.log("looping over data points: " + data_points.length)
+  
   // iterate over data and build the algolia record
   for (var i = 0; i < data_points.length; i++) {
     var data_point = data_points[i];
@@ -66,7 +59,7 @@ function dataToAlgoliaObject(data_points){
         // the objectID is the key for the algolia record, and mapping
         // data id to object ID guarantees only one copy of the data in algolia
         // change these variables pending on your data source and how you want to display data
-        objectID: data_point.id,
+        objectID: data_point.objectID,
         name: data_point.name,
         rating: data_point.rating,
         image_path: data_point.image_path,
@@ -76,18 +69,15 @@ function dataToAlgoliaObject(data_points){
       // we can see our objects being created in the console!
       // use console.log for debugging while you are learning and creating
       // feel free to remove/comment out when you are done.
-    console.log("inside loop creating Algolia objects " + algoliaObject)
+    // console.log("inside loop creating Algolia objects ")
 
     // after creating the algoliaObject with the data we want, we push into our array
     algoliaObjects.push(algoliaObject);
   }
-  // we need to tell Algolia what and how we want to search our data with setSettings
-  // configureAlgoliaIndex()
 
   // we return our array of usable algoliaObjects at the end of this function
   // this will be what we see in our response that we will then send to algolia
-  // return algoliaObjects;
-  sendDataToAlgolia(algoliaObjects);
+  return sendDataToAlgolia(algoliaObjects);
 }
 
 // (~˘▽˘)~ Useful tips
@@ -97,42 +87,42 @@ function dataToAlgoliaObject(data_points){
 
 // (~˘▽˘)~ Basic Setup:
 // searchableAttributes: list here what you would like searchable from the algoliaObject you created
-// customRanking: choose how your data will be displayed, desc() or asc()
 // attributesToHighlight: highlights the text you are searching for
+// customRanking: choose how your data will be displayed, desc() or asc()
 // attributesToRetrieve: return these attributes for dislaying in search results
 // ignorePlurals: make plural and singular matches count the same for languages you specify
 
 function configureAlgoliaIndex(){
-  console.log("Configuring index")
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
   algoliaIndex.setSettings({
   searchableAttributes: [
-    'name',
-    'alternative_name'
+    'name'
   ],
-  customRanking: ['desc(rating)'],
+  attributesToHighlight: [
+    'name'
+  ],
+  customRanking: [
+    'desc(rating)'
+  ],
+  attributesToRetrieve: [
+    'name', 
+    'rating',
+    'image_path'
+  ]
   });
-  // set settings to true
-  process.env.SET_ALGOLIA_SETTINGS = 1 
 }
 
 function sendDataToAlgolia(algoliaObjects){
-  console.log("Sending data to Algolia" + algoliaObjects)
   algoliaIndex.addObjects(algoliaObjects, function(err, content) {
-    //console.log(content);
-    process.env.SEND_DATA_TO_ALGOLIA = 1
   })
-   
 }
 
 function checkDataStructure(data_url){
-  console.log("BEFORE " + process.env.CHECK_DATA_URL)
   return axios.get(data_url, {})
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
     process.env.CHECK_DATA_URL = 1
-    console.log("AFTER " + process.env.CHECK_DATA_URL)
   })
   .catch(function(error) {
     console.log(error)
