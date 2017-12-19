@@ -12,13 +12,13 @@ $(document).ready(function() {
     }
   });
 
-  // conects the search input on your page to Algolia
-  search.addWidget(
-    instantsearch.widgets.searchBox({
-      container: '#search-input'
-    })
-  );
-
+// conects the search input on your page to Algolia
+search.addWidget(
+  instantsearch.widgets.searchBox({
+    container: '#search-box',
+    placeholder: 'Search your favorite actors'
+  })
+);
   // adds the results of your data, in your return statement you can change what you want shown
   search.addWidget(
     instantsearch.widgets.hits({
