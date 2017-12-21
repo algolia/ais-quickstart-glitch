@@ -45,7 +45,7 @@ $(document).ready(function() {
     }
   }
   
-  // applyClasses()
+  applyClasses()
 
   $('#step-3-btn').click(function(event) {
       event.preventDefault();
@@ -58,8 +58,9 @@ $(document).ready(function() {
   $('#step-4-btn').click(function(event) {
       event.preventDefault();
       $.post('/upload-data', function(resp) {
-        applyClasses()
         glitchApp.data.upload_data = true
+        applyClasses()
+        
       });
       // $(this).addClass("disabled", 500, "easeOutBounce" );
   });
@@ -67,8 +68,9 @@ $(document).ready(function() {
   $('#step-5-btn').click(function(event) {
       event.preventDefault();
       $.post('/configure-index', function(resp) {
-        applyClasses()
         glitchApp.data.set_settings = true
+        applyClasses()
+        
       });
       // $(this).addClass("disabled", 500, "easeOutBounce" );
   });
