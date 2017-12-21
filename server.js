@@ -25,7 +25,6 @@ app.get('/search', (request, response) => {
   response.send(nunjucks.render('search.html', getTemplateContext(request)));
 });
 
-// change to app.post
 // check data structure via button in UI and in console logs
 app.post('/check-data', (request, response) => {
   algoliaHelper.checkDataStructure(dataUrl)
@@ -35,11 +34,13 @@ app.post('/check-data', (request, response) => {
 // upload data to Algolia via button in UI
 app.post('/upload-data', (request, response) => {
   algoliaHelper.indexTweets(dataUrl);
+  response.sendStatus(200)
 });
 
 // configure index Algolia via button in UI
 app.post('/configure-index', (request, response) => {
   algoliaHelper.configureAlgoliaIndex();
+  response.sendStatus(200)  
 });
 
 function getTemplateContext(request) {
@@ -50,11 +51,11 @@ function getTemplateContext(request) {
       search_api_key: process.env.ALGOLIA_SEARCH_API_KEY
     },
     data: {
-      algolia_env: algoliaClient(),
-      new_domain: newDomainCheck(),
-      data_structure: algoliaDataStructure(),
-      upload_data: algoliaUploadData(),
-      set_settings: algoliaSetSettings()
+      algolia_env: checkAlgoliaEnvKeys(),
+      new_domain: checkNewDomain(),
+      data_structure: checkDataStructure(),
+      upload_data: checkAlgoliaDataUpload(),
+      set_settings: checkAlgoliaSetSettings()
     }
   };
 }
@@ -62,7 +63,7 @@ function getTemplateContext(request) {
 // helper methods to check server side data for users set up checklist
 
 // check to see if user has remixed the application
-function newDomainCheck() {
+function checkNewDomain() {
   if (process.env.PROJECT_DOMAIN != 'instantsearch-quickstart') {
     console.log("new domain " + process.env.PROJECT_DOMAIN)
     return true;
@@ -73,7 +74,7 @@ function newDomainCheck() {
 }
 
 // check to see if user has added variables to their .env file
-function algoliaClient() {
+function checkAlgoliaEnvKeys() {
   if (process.env.ALGOLIA_APP_ID &&
       process.env.ALGOLIA_ADMIN_API_KEY &&
       process.env.ALGOLIA_SEARCH_API_KEY) {
@@ -84,8 +85,8 @@ function algoliaClient() {
   }
 }
 
-// check if user has viewed data structure with helper method (is algolia objects empty)
-function algoliaDataStructure(){
+// check if user has viewed data structure
+function checkDataStructure(){
   // if (algoliaHelper)
   // if (process.env.CHECK_DATA_URL) {
   //   return true;
@@ -96,7 +97,7 @@ function algoliaDataStructure(){
 }
 
 // check getData
-function algoliaUploadData(){
+function checkAlgoliaDataUpload(){
   // if (process.env.SEND_DATA_TO_ALGOLIA) {
   //   return true;
   // } else {
@@ -106,7 +107,7 @@ function algoliaUploadData(){
 }
 
 // check getSettings
-function algoliaSetSettings(){
+function checkAlgoliaSetSettings(){
 //   if (process.env.SET_ALGOLIA_SETTINGS) {
 //     return true;
 //   } else {

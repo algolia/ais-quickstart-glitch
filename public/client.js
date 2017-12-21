@@ -2,7 +2,7 @@ $(document).ready(function() {
   // the object set by the server containing valuable configuration info
   var glitchApp = window.glitchApp;
 
-  var els = {
+  var elements = {
     one: $(document.getElementById("step-1")),
     two: $(document.getElementById("step-2")),
     three: $(document.getElementById("step-3")),
@@ -12,9 +12,13 @@ $(document).ready(function() {
   }
 
   function currentStep() {
-    if (glitchApp.data.step_3_done) {
+    if (glitchApp.data.set_settings) {
+      return 'six'
+    } else if (glitchApp.data.upload_data) {
+      return 'five'
+    } else if (glitchApp.data.data_structure) {
       return 'four'
-    } else if (glitchApp.data.algolia_env) {
+   } else if (glitchApp.data.algolia_env) {
       return 'three'
     } else if (glitchApp.data.new_domain) {
       return 'two'
@@ -24,64 +28,43 @@ $(document).ready(function() {
   }
 
   function applyClasses() {
-    var steps = Object.keys(els) // ['one', 'two', 'three']
-    var current = currentStep() // 'two'
+    var steps = Object.keys(elements)
+    var current = currentStep()
 
-    // Clear the slate
     for(var i = 0 ; i < steps.length ; i++) {
-      els[steps[i]].removeClass('completed-steps current-step')
+      elements[steps[i]].removeClass('completed-steps current-step')
     }
 
-    // Apply the classes
     for(var i = 0 ; i < steps.length ; i++) {
       if (steps[i] === current) {
-        els[current].addClass('current-step')
+        elements[current].addClass('current-step')
         break
       } else {
-        els[steps[i]].addClass('completed-steps')
+        elements[steps[i]].addClass('completed-steps')
       }
     }
   }
   
   applyClasses()
-  // // Step 1: check if the domain has changed from instantsearch-quickstart
-  // if (glitchApp.data.new_domain) {
-  //   document.getElementById("step-1").classList.add('completed-steps');
-  //   document.getElementById("step-1").classList.remove('current-step');
-  //   document.getElementById("step-2").classList.add('current-step');  
-  // }
-  
-  // // Step 2: check if Algolia API keys are in the .env file
-  // if (glitchApp.data.algolia_env) {
-  //   document.getElementById("step-2").classList.add('completed-steps');
-  //   document.getElementById("step-2").classList.remove('current-step');
-  //   document.getElementById("step-3").classList.add('current-step');
-  //   document.getElementById("step-3-btn").classList.remove('disabled');
-  // }
 
   $('#step-3-btn').click(function(event) {
-      event.preventDefault(); // Stops browser from navigating away from page
+      event.preventDefault();
       $.post('/check-data', function(resp) {
-        glitchApp.data.step_3_done = true
         applyClasses()
-        // $('#step-3').switchClass("current-step", "completed-steps", 500, "easeInOutQuad");
       });
-      $(this).addClass("disabled", 1000, "easeOutBounce" );
   });
 
   $('#step-4-btn').click(function(event) {
-      event.preventDefault(); // Stops browser from navigating away from page
+      event.preventDefault();
       $.post('/upload-data', function(resp) {
-        // $('#step-4').switchClass("current-step", "completed-steps", 500, "easeInOutQuad");
+        applyClasses()
       });
-      $(this).addClass("disabled", 1000, "easeOutBounce" );
   });
 
   $('#step-5-btn').click(function(event) {
-      event.preventDefault(); // Stops browser from navigating away from page
+      event.preventDefault();
       $.post('/configure-index', function(resp) {
-        // $('#step-5').switchClass("current-step", "completed-steps", 500, "easeInOutQuad");
+        applyClasses()
       });
-      $(this).addClass("disabled", 1000, "easeOutBounce" );
   });
 });
