@@ -58,8 +58,7 @@ function dataToAlgoliaObject(data_points){
         // (~˘▽˘)~ Useful tips
         // the objectID is the key for the algolia record, and mapping
         // data id to object ID guarantees only one copy of the data in algolia
-        // change these variables pending on your data source and how you want to display data
-        objectID: data_point.objectID,
+        //objectID: data_point.objectID,
         name: data_point.name,
         rating: data_point.rating,
         image_path: data_point.image_path,
@@ -94,6 +93,7 @@ function dataToAlgoliaObject(data_points){
 
 function configureAlgoliaIndex(){
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
+  console.log("setSettings with Algolia")
   algoliaIndex.setSettings({
   searchableAttributes: [
     'name'
@@ -113,6 +113,7 @@ function configureAlgoliaIndex(){
 }
 
 function sendDataToAlgolia(algoliaObjects){
+  console.log("sending data to Algolia")
   algoliaIndex.addObjects(algoliaObjects, function(err, content) {
   })
 }
@@ -122,7 +123,6 @@ function checkDataStructure(data_url){
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
-    process.env.CHECK_DATA_URL = 1
   })
   .catch(function(error) {
     console.log(error)

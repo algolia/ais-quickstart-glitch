@@ -27,30 +27,25 @@ app.get('/search', (request, response) => {
 
 // change to app.post
 // check data structure via button in UI and in console logs
-app.get('/check-data', (request, response) => {
-  algoliaHelper.checkDataStructure(dataUrl).then(() => {
-    response.send(nunjucks.render('index.html', getTemplateContext(request)));
-  }).catch((err) => {
-    response.redirect('/');
-  });
+app.post('/check-data', (request, response) => {
+  algoliaHelper.checkDataStructure(dataUrl)
+  response.sendStatus(200)
 });
 
 // upload data to Algolia via button in UI
-app.get('/upload-data', (request, response) => {
+app.post('/upload-data', (request, response) => {
   algoliaHelper.indexTweets(dataUrl);
-  response.send(nunjucks.render('index.html', getTemplateContext(request)));
 });
 
 // configure index Algolia via button in UI
-app.get('/configure-index', (request, response) => {
+app.post('/configure-index', (request, response) => {
   algoliaHelper.configureAlgoliaIndex();
-  response.send(nunjucks.render('index.html', getTemplateContext(request)));
 });
 
 function getTemplateContext(request) {
   return {
     algolia: {
-      index_name: process.env.PROJECT_DOMAIN,
+      index_name: "movie-actors",
       app_id: process.env.ALGOLIA_APP_ID,
       search_api_key: process.env.ALGOLIA_SEARCH_API_KEY
     },
@@ -91,12 +86,13 @@ function algoliaClient() {
 
 // check if user has viewed data structure with helper method (is algolia objects empty)
 function algoliaDataStructure(){
+  // if (algoliaHelper)
   // if (process.env.CHECK_DATA_URL) {
   //   return true;
   // } else {
   //   console.warn('Data has not been checked yet');
   //   return null;
-  }
+  //}
 }
 
 // check getData
