@@ -47,9 +47,9 @@ function indexTweets(data_url){
 // you can see the title for example by looping through the objects by calling algoliaObject.title indvididually
 // change the variable names in here according to what makes sense with the data you are using
 // required and best practice for Algolia is to have objectID be the same as the datapoint id 
-
+var algoliaObjects = [];
 function dataToAlgoliaObject(data_points){
-  var algoliaObjects = [];
+  // var algoliaObjects = [];
   
   // iterate over data and build the algolia record
   for (var i = 0; i < data_points.length; i++) {
@@ -113,8 +113,8 @@ function configureAlgoliaIndex(){
 }
 
 function sendDataToAlgolia(algoliaObjects){
-  console.log("sending data to Algolia")
   algoliaIndex.addObjects(algoliaObjects, function(err, content) {
+    console.log("sending data to Algolia")  
   })
 }
 
@@ -123,10 +123,22 @@ function checkDataStructure(data_url){
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
+    return true
   })
   .catch(function(error) {
     console.log(error)
   })
 };
 
-module.exports = {indexTweets, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure}
+function checkSettings(){
+  algoliaIndex.getSettings(function(err, content) {
+    return content.attributesToRetrieve;
+  });
+}
+
+function checkData(){
+  algoliaIndex.getObjects([algoliaObjects[0]], function(err, content) {
+    return content
+  });
+}
+module.exports = {indexTweets, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure, checkSettings, checkData}

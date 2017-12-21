@@ -87,33 +87,32 @@ function checkAlgoliaEnvKeys() {
 
 // check if user has viewed data structure
 function checkDataStructure(){
-  // if (algoliaHelper)
-  // if (process.env.CHECK_DATA_URL) {
-  //   return true;
-  // } else {
-  //   console.warn('Data has not been checked yet');
-  //   return null;
-  //}
+  if (algoliaHelper.checkDataStructure) {
+    return true
+  } else {
+    console.warn("checkData has not been called yet")
+    return null;
+  }
 }
 
 // check getData
 function checkAlgoliaDataUpload(){
-  // if (process.env.SEND_DATA_TO_ALGOLIA) {
-  //   return true;
-  // } else {
-  //   console.warn('Data has not been sent to Algolia yet');
-  //   return null;
-  // }
+  if (algoliaHelper.checkData() != undefined) {
+    return true
+  } else {
+    console.warn("addObjects has not been called yet")
+    return null;
+  }
 }
 
 // check getSettings
 function checkAlgoliaSetSettings(){
-//   if (process.env.SET_ALGOLIA_SETTINGS) {
-//     return true;
-//   } else {
-//     console.warn('SetSettings has not been called yet');
-//     return null;
-//   }
+  if (algoliaHelper.checkSettings() != null) {
+    return true
+  } else {
+      console.warn("setSettings has not been called yet")
+      return null;
+  }
 }
 
 // listen for requests :)

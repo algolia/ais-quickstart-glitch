@@ -51,6 +51,7 @@ $(document).ready(function() {
       event.preventDefault();
       $.post('/check-data', function(resp) {
         applyClasses()
+        $(this).addClass("disabled", 500, "easeOutBounce" );
       });
   });
 
@@ -58,6 +59,7 @@ $(document).ready(function() {
       event.preventDefault();
       $.post('/upload-data', function(resp) {
         applyClasses()
+        $(this).addClass("disabled", 500, "easeOutBounce" );
       });
   });
 
@@ -65,6 +67,7 @@ $(document).ready(function() {
       event.preventDefault();
       $.post('/configure-index', function(resp) {
         applyClasses()
+        $(this).addClass("disabled", 500, "easeOutBounce" );
       });
   });
 });
