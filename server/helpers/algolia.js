@@ -34,6 +34,9 @@ function indexTweets(data_url){
   .then(function(response){
      sendDataToAlgolia(response)
   })
+  .then(function(response){
+    return
+  })
   .catch(function(error) {
       console.warn(error)
     })
@@ -123,7 +126,7 @@ function checkDataStructure(data_url){
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
-    return true
+    // return true
   })
   .catch(function(error) {
     console.log(error)

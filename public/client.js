@@ -18,7 +18,7 @@ $(document).ready(function() {
       return 'five'
     } else if (glitchApp.data.data_structure) {
       return 'four'
-   } else if (glitchApp.data.algolia_env) {
+    } else if (glitchApp.data.algolia_env) {
       return 'three'
     } else if (glitchApp.data.new_domain) {
       return 'two'
@@ -45,29 +45,31 @@ $(document).ready(function() {
     }
   }
   
-  applyClasses()
+  // applyClasses()
 
   $('#step-3-btn').click(function(event) {
       event.preventDefault();
       $.post('/check-data', function(resp) {
         applyClasses()
-        $(this).addClass("disabled", 500, "easeOutBounce" );
       });
+      // $(this).addClass("disabled", 500, "easeOutBounce" );
   });
 
   $('#step-4-btn').click(function(event) {
       event.preventDefault();
       $.post('/upload-data', function(resp) {
         applyClasses()
-        $(this).addClass("disabled", 500, "easeOutBounce" );
+        glitchApp.data.upload_data = true
       });
+      // $(this).addClass("disabled", 500, "easeOutBounce" );
   });
 
   $('#step-5-btn').click(function(event) {
       event.preventDefault();
       $.post('/configure-index', function(resp) {
         applyClasses()
-        $(this).addClass("disabled", 500, "easeOutBounce" );
+        glitchApp.data.set_settings = true
       });
+      // $(this).addClass("disabled", 500, "easeOutBounce" );
   });
 });

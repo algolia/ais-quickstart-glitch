@@ -33,8 +33,9 @@ app.post('/check-data', (request, response) => {
 
 // upload data to Algolia via button in UI
 app.post('/upload-data', (request, response) => {
-  algoliaHelper.indexTweets(dataUrl);
-  response.sendStatus(200)
+  algoliaHelper.indexTweets(dataUrl).then(() => {
+    response.sendStatus(200)
+  })
 });
 
 // configure index Algolia via button in UI
