@@ -25,41 +25,38 @@ app.get('/search', (request, response) => {
   response.send(nunjucks.render('search.html', getTemplateContext(request)));
 });
 
-// change to app.post
 // check data structure via button in UI and in console logs
-app.get('/check-data', (request, response) => {
-  algoliaHelper.checkDataStructure(dataUrl).then(() => {
-    response.send(nunjucks.render('index.html', getTemplateContext(request)));
-  }).catch((err) => {
-    response.redirect('/');
-  });
+app.post('/check-data', (request, response) => {
+  algoliaHelper.checkDataStructure(dataUrl)
+  response.sendStatus(200)
 });
 
 // upload data to Algolia via button in UI
-app.get('/upload-data', (request, response) => {
-  algoliaHelper.indexTweets(dataUrl);
-  response.send(nunjucks.render('index.html', getTemplateContext(request)));
+app.post('/upload-data', (request, response) => {
+  algoliaHelper.indexTweets(dataUrl).then(() => {
+    response.sendStatus(200)
+  })
 });
 
 // configure index Algolia via button in UI
-app.get('/configure-index', (request, response) => {
+app.post('/configure-index', (request, response) => {
   algoliaHelper.configureAlgoliaIndex();
-  response.send(nunjucks.render('index.html', getTemplateContext(request)));
+  response.sendStatus(200)  
 });
 
 function getTemplateContext(request) {
   return {
     algolia: {
-      index_name: process.env.PROJECT_DOMAIN,
+      index_name: "movie-actors",
       app_id: process.env.ALGOLIA_APP_ID,
       search_api_key: process.env.ALGOLIA_SEARCH_API_KEY
     },
     data: {
-      algolia_env: algoliaClient(),
-      new_domain: newDomainCheck(),
-      data_structure: algoliaDataStructure(),
-      upload_data: algoliaUploadData(),
-      set_settings: algoliaSetSettings()
+      algolia_env: checkAlgoliaEnvKeys(),
+      new_domain: checkNewDomain(),
+      data_structure: checkDataStructure(),
+      upload_data: checkAlgoliaDataUpload(),
+      set_settings: checkAlgoliaSetSettings()
     }
   };
 }
@@ -67,7 +64,7 @@ function getTemplateContext(request) {
 // helper methods to check server side data for users set up checklist
 
 // check to see if user has remixed the application
-function newDomainCheck() {
+function checkNewDomain() {
   if (process.env.PROJECT_DOMAIN != 'instantsearch-quickstart') {
     console.log("new domain " + process.env.PROJECT_DOMAIN)
     return true;
@@ -78,7 +75,7 @@ function newDomainCheck() {
 }
 
 // check to see if user has added variables to their .env file
-function algoliaClient() {
+function checkAlgoliaEnvKeys() {
   if (process.env.ALGOLIA_APP_ID &&
       process.env.ALGOLIA_ADMIN_API_KEY &&
       process.env.ALGOLIA_SEARCH_API_KEY) {
@@ -89,34 +86,34 @@ function algoliaClient() {
   }
 }
 
-// check if user has viewed data structure with helper method (is algolia objects empty)
-function algoliaDataStructure(){
-  // if (process.env.CHECK_DATA_URL) {
-  //   return true;
-  // } else {
-  //   console.warn('Data has not been checked yet');
-  //   return null;
+// check if user has viewed data structure
+function checkDataStructure(){
+  if (algoliaHelper.checkDataStructure) {
+    return true
+  } else {
+    console.warn("checkData has not been called yet")
+    return null;
   }
 }
 
 // check getData
-function algoliaUploadData(){
-  // if (process.env.SEND_DATA_TO_ALGOLIA) {
-  //   return true;
-  // } else {
-  //   console.warn('Data has not been sent to Algolia yet');
-  //   return null;
-  // }
+function checkAlgoliaDataUpload(){
+  if (algoliaHelper.checkData() != undefined) {
+    return true
+  } else {
+    console.warn("addObjects has not been called yet")
+    return null;
+  }
 }
 
 // check getSettings
-function algoliaSetSettings(){
-//   if (process.env.SET_ALGOLIA_SETTINGS) {
-//     return true;
-//   } else {
-//     console.warn('SetSettings has not been called yet');
-//     return null;
-//   }
+function checkAlgoliaSetSettings(){
+  if (algoliaHelper.checkSettings() != null) {
+    return true
+  } else {
+      console.warn("setSettings has not been called yet")
+      return null;
+  }
 }
 
 // listen for requests :)

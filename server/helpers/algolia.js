@@ -34,6 +34,9 @@ function indexTweets(data_url){
   .then(function(response){
      sendDataToAlgolia(response)
   })
+  .then(function(response){
+    return
+  })
   .catch(function(error) {
       console.warn(error)
     })
@@ -47,9 +50,9 @@ function indexTweets(data_url){
 // you can see the title for example by looping through the objects by calling algoliaObject.title indvididually
 // change the variable names in here according to what makes sense with the data you are using
 // required and best practice for Algolia is to have objectID be the same as the datapoint id 
-
+var algoliaObjects = [];
 function dataToAlgoliaObject(data_points){
-  var algoliaObjects = [];
+  // var algoliaObjects = [];
   
   // iterate over data and build the algolia record
   for (var i = 0; i < data_points.length; i++) {
@@ -58,8 +61,7 @@ function dataToAlgoliaObject(data_points){
         // (~˘▽˘)~ Useful tips
         // the objectID is the key for the algolia record, and mapping
         // data id to object ID guarantees only one copy of the data in algolia
-        // change these variables pending on your data source and how you want to display data
-        objectID: data_point.objectID,
+        //objectID: data_point.objectID,
         name: data_point.name,
         rating: data_point.rating,
         image_path: data_point.image_path,
@@ -94,6 +96,7 @@ function dataToAlgoliaObject(data_points){
 
 function configureAlgoliaIndex(){
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
+  console.log("setSettings with Algolia")
   algoliaIndex.setSettings({
   searchableAttributes: [
     'name'
@@ -114,6 +117,7 @@ function configureAlgoliaIndex(){
 
 function sendDataToAlgolia(algoliaObjects){
   algoliaIndex.addObjects(algoliaObjects, function(err, content) {
+    console.log("sending data to Algolia")  
   })
 }
 
@@ -122,11 +126,22 @@ function checkDataStructure(data_url){
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
-    process.env.CHECK_DATA_URL = 1
+    // return true
   })
   .catch(function(error) {
     console.log(error)
   })
 };
 
-module.exports = {indexTweets, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure}
+function checkSettings(){
+  algoliaIndex.getSettings(function(err, content) {
+    return content.attributesToRetrieve;
+  });
+}
+
+function checkData(){
+  algoliaIndex.getObjects([algoliaObjects[0]], function(err, content) {
+    return content
+  });
+}
+module.exports = {indexTweets, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure, checkSettings, checkData}
