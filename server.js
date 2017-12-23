@@ -65,7 +65,7 @@ function getTemplateContext(request) {
 
 // check to see if user has remixed the application
 function checkNewDomain() {
-  if (process.env.PROJECT_DOMAIN != 'instantsearch-quickstart') {
+  if (process.env.PROJECT_DOMAIN != 'algolia-quickstart') {
     console.log("new domain " + process.env.PROJECT_DOMAIN)
     return true;
   } else {
@@ -88,7 +88,7 @@ function checkAlgoliaEnvKeys() {
 
 // check if user has viewed data structure
 function checkDataStructure(){
-  if (algoliaHelper.checkDataStructure) {
+  if (algoliaHelper.checkDataStructure === true) {
     return true
   } else {
     console.warn("checkData has not been called yet")
