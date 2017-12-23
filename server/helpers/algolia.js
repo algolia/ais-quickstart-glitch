@@ -4,21 +4,32 @@ if (!process.env.PROJECT_DOMAIN) {
   require('dotenv').config();
 }
 
+const algoliasearch = require('algoliasearch');
+
+if (process.env.ALGOLIA_APP_ID && process.env.ALGOLIA_ADMIN_API_KEY && process.env.ALGOLIA_APP_ID) {
+  var algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_API_KEY);
+  var algoliaIndex = algoliaClient.initIndex("movie-actors");  
+  console.log("variables assigned")
+} else {
+  var algoliaClient = ''
+  var algoliaIndex = 'blankindex'
+  console.log("no variables")
+}
 // use axios for api calls
 const axios = require('axios');
 
 // require algoliasearch from the npm package here for usage
-const algoliasearch = require('algoliasearch');
 
 // instantiate constant for algoliasearch passing in variables needed at setup
-const algoliaClient = algoliasearch(process.env.ALGOLIA_APP_ID, process.env.ALGOLIA_ADMIN_API_KEY);
+
 
 // (~˘▽˘)~ Useful tips
 // index name is currently using project domain from glitch ie dancing-squirrel
 // change within parens of initIndex for something relevant to the data you want to index
 // good examples are 'movie-actors' or 'dog-pictures' or 'my-contacts'
 // you can find this index created under your Algolia dashboard => indices
-const algoliaIndex = algoliaClient.initIndex("movie-actors");
+
+
 
 // (~˘▽˘)~ Useful tips
 // call this function from the server.js to start indexing data
@@ -98,20 +109,20 @@ function configureAlgoliaIndex(){
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
   console.log("setSettings with Algolia")
   algoliaIndex.setSettings({
-  searchableAttributes: [
-    'name'
-  ],
-  attributesToHighlight: [
-    'name'
-  ],
-  customRanking: [
-    'desc(rating)'
-  ],
-  attributesToRetrieve: [
-    'name', 
-    'rating',
-    'image_path'
-  ]
+    searchableAttributes: [
+      'name'
+    ],
+    attributesToHighlight: [
+      'name'
+    ],
+    customRanking: [
+      'desc(rating)'
+    ],
+    attributesToRetrieve: [
+      'name', 
+      'rating',
+      'image_path'
+    ]
   });
 }
 
@@ -134,14 +145,22 @@ function checkDataStructure(data_url){
 };
 
 function checkSettings(){
-  algoliaIndex.getSettings(function(err, content) {
-    return content.attributesToRetrieve;
-  });
+  if (algoliaObjects.length != 0) {
+    algoliaIndex.getSettings(function(err, content) {  
+      return content.attributesToRetrieve;
+    }); 
+  } else {
+    return null
+  }
 }
 
 function checkData(){
-  algoliaIndex.getObjects([algoliaObjects[0]], function(err, content) {
-    return content
-  });
+  if (algoliaObjects.length != 0 ) {
+    algoliaIndex.getObjects([algoliaObjects[0]], function(err, content) {
+      return content
+    });
+  } else {
+    return null
+  }
 }
 module.exports = {indexTweets, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure, checkSettings, checkData}
