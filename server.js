@@ -9,7 +9,6 @@ const dataUrl = "https://raw.githubusercontent.com/algolia/datasets/master/movie
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
-//app.use(requireEnvironmentVariables);
 // we use nunjucks to send data that we can later use in our views
 nunjucks.configure('views', {
   express: app,
@@ -60,20 +59,6 @@ function getTemplateContext(request) {
       set_settings: checkAlgoliaSetSettings()
     }
   };
-}
-
-
-function requireEnvironmentVariables(request, response, next) {
-  if (process.env.ALGOLIA_APP_ID &&
-      process.env.ALGOLIA_ADMIN_API_KEY &&
-      process.env.ALGOLIA_SEARCH_API_KEY){
-    next();
-  } else {
-    throw {
-      message: "One or more environment variables is missing",
-      detail: "Don't worry! If you just remixed, this is normal. See the README for further instructions."
-    };
-  }
 }
 
 // helper methods to check server side data for users set up checklist
