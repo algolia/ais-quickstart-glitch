@@ -15,10 +15,6 @@ Visit homepage for remixing instructions!
 We recommend splitting your screen and using one tab for code and your console and the other for following along at the homepage.
 ![remixing-screenshot](https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202017-12-13%20at%209.49.53%20AM.png?1513187611035)
 
-Here is what we will build:
-<img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fezgif.com-gif-maker.gif?1514128983358" style="width: 475px; height:300px">
-
-
 Made from your friends at [Algolia](https://algolia.com/)
 ------------
 Happy searching!
