@@ -10,7 +10,7 @@ We have instructions below and some friends throughout the code helping you alon
 **Jacques the Explorer** ✺◟( • ω • )◞✺ helps you explore the code base and get useful tips for what is happening in certain functions.
 
 
-Instructions for Remixing (Visit the [homepage](process.env.PROJECT_DOMAIN.glitch.me)!)
+Visit homepage for remixing instructions!
 ------------
 ![remixing-screenshot](https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202017-12-13%20at%209.49.53%20AM.png?1513187611035)
 

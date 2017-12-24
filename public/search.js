@@ -12,7 +12,7 @@ $(document).ready(function() {
     }
   });
 
-//conects the search input on your page to Algolia
+// //conects the search input on your page to Algolia
 // search.addWidget(
 //   instantsearch.widgets.searchBox({
 //     container: '#search-box',
@@ -25,7 +25,7 @@ $(document).ready(function() {
 //       container: '#hits',
 //       hitsPerPage: 12,
 //       templates: {
-//         empty: `We didn't find any results for the search <em>\"{{query}}\"</em>`,
+//         empty: `<div class="col-md-12" style="text-align: center;"> We didn't find any results for the search <em>\"{{query}}\"</em></div`,
 //         item: function(hit) {
 //           try {
 //             return `
