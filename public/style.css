@@ -45,6 +45,16 @@ body {
   text-decoration: line-through;
 }
 
+.completed-steps a {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.completed-steps a img {
+  opacity: 0.6;
+}
+
+
 /* copied from the instantsearch theme located at
    https://cdn.jsdelivr.net/npm/instantsearch.js@2.2.0/dist/instantsearch-theme-algolia.css */
 .ais-pagination {
