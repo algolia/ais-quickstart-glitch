@@ -1,7 +1,7 @@
 Welcome to the Algolia quickstart
 =========================
 
-**Algolia** is a hosted search api that gives you access to instant search experience by just setting a few variables. Take data you want to use and make it searchable!
+**Algolia** is a hosted search API that gives you access to instant search experience by just setting a few variables. Take data you want to use and make it searchable!
 
 We have instructions on the homepage and some friends throughout the code base helping you along the way.
 
