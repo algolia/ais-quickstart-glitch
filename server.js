@@ -27,13 +27,14 @@ app.get('/search', (request, response) => {
 
 // check data structure via button in UI and in console logs
 app.post('/check-data', (request, response) => {
-  algoliaHelper.checkDataStructure(dataUrl)
-  response.sendStatus(200)
+  algoliaHelper.checkDataStructure(dataUrl).then(() => {
+    response.sendStatus(200)
+  })
 });
 
 // upload data to Algolia via button in UI
 app.post('/upload-data', (request, response) => {
-  algoliaHelper.indexTweets(dataUrl).then(() => {
+  algoliaHelper.indexData(dataUrl).then(() => {
     response.sendStatus(200)
   })
 });
@@ -88,7 +89,7 @@ function checkAlgoliaEnvKeys() {
 
 // check if user has viewed data structure
 function checkDataStructure(){
-  if (algoliaHelper.checkDataStructure === true) {
+  if (algoliaHelper.checkDataStructure() === true) {
     return true
   } else {
     console.warn("checkData has not been called yet")
