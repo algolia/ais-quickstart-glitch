@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const nunjucks = require('nunjucks')
+const axios = require('axios');
 
 const algoliaHelper = require('./server/helpers/algolia');
 
@@ -27,7 +28,7 @@ app.get('/search', (request, response) => {
 
 // check data structure via button in UI and in console logs
 app.post('/check-data', (request, response) => {
-  algoliaHelper.checkDataStructure(dataUrl).then(() => {
+  checkDataStructure(dataUrl).then(() => {
     response.sendStatus(200)
   })
 });
@@ -88,13 +89,17 @@ function checkAlgoliaEnvKeys() {
 }
 
 // check if user has viewed data structure
-function checkDataStructure(){
-  if (algoliaHelper.checkDataStructure() === true) {
+function checkDataStructure(data_url){
+  return axios.get(data_url, {})
+  .then(function(response){
+    console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
+    console.log(response.data[0]);
     return true
-  } else {
-    console.warn("checkData has not been called yet")
-    return null;
-  }
+  })
+  .catch(function(error) {
+    console.log(error)
+    return null
+  })
 }
 
 // check getData
