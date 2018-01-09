@@ -132,11 +132,12 @@ function sendDataToAlgolia(algoliaObjects){
   })
 }
 
-function checkDataStructure(data_url){
+function logDataStructure(data_url){
   return axios.get(data_url, {})
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
+    return true
   })
   .catch(function(error) {
     console.log(error)
@@ -163,4 +164,4 @@ function checkData(){
     return null
   }
 }
-module.exports = {indexData, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, checkDataStructure, checkSettings, checkData}
+module.exports = {indexData, dataToAlgoliaObject, configureAlgoliaIndex, sendDataToAlgolia, logDataStructure, checkSettings, checkData}
