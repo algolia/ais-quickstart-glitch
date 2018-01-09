@@ -89,7 +89,7 @@ function checkAlgoliaEnvKeys() {
 
 // check if user has viewed data structure
 function checkDataStructure(){
-  if (algoliaHelper.checkDataStructure() === true) {
+  if (algoliaHelper.checkDataStructure()) {
     return true
   } else {
     console.warn("checkData has not been called yet")

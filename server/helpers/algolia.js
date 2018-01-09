@@ -72,7 +72,7 @@ function dataToAlgoliaObject(data_points){
         // (~˘▽˘)~ Useful tips
         // the objectID is the key for the algolia record, and mapping
         // data id to object ID guarantees only one copy of the data in algolia
-        // objectID: data_point.objectID,
+        //objectID: data_point.objectID,
         name: data_point.name,
         rating: data_point.rating,
         image_path: data_point.image_path,
@@ -93,12 +93,6 @@ function dataToAlgoliaObject(data_points){
   return sendDataToAlgolia(algoliaObjects);
 }
 
-function sendDataToAlgolia(algoliaObjects){
-  algoliaIndex.addObjects(algoliaObjects, function(err, content) {
-    console.log("sending data to Algolia")  
-  })
-}
-
 // (~˘▽˘)~ Useful tips
 // there are a lot of options for your setSettings on how you want to see your data
 // using the constant we defined earlier for initiated the index, we call setSettings
@@ -115,21 +109,27 @@ function configureAlgoliaIndex(){
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
   console.log("setSettings with Algolia")
   algoliaIndex.setSettings({
-    // searchableAttributes: [
-    //   'name'
-    // ],
-    // attributesToHighlight: [
-    //   'name'
-    // ],
-    // customRanking: [
-    //   'desc(rating)'
-    // ],
-    // attributesToRetrieve: [
-    //   'name', 
-    //   'rating',
-    //   'image_path'
-    // ]
+    searchableAttributes: [
+      'name'
+    ],
+    attributesToHighlight: [
+      'name'
+    ],
+    customRanking: [
+      'desc(rating)'
+    ],
+    attributesToRetrieve: [
+      'name', 
+      'rating',
+      'image_path'
+    ]
   });
+}
+
+function sendDataToAlgolia(algoliaObjects){
+  algoliaIndex.addObjects(algoliaObjects, function(err, content) {
+    console.log("sending data to Algolia")  
+  })
 }
 
 function checkDataStructure(data_url){
@@ -137,6 +137,7 @@ function checkDataStructure(data_url){
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
+    return true
   })
   .catch(function(error) {
     console.log(error)
@@ -147,6 +148,7 @@ function checkSettings(){
   if (algoliaObjects.length != 0) {
     algoliaIndex.getSettings(function(err, content) {  
       return content.attributesToRetrieve;
+      return true;
     }); 
   } else {
     return null

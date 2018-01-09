@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  // the object set by the server containing valuable configuration info
-  var glitchApp = window.glitchApp;
 
   var elements = {
     one: $(document.getElementById("step-1")),
@@ -12,15 +10,15 @@ $(document).ready(function() {
   }
 
   function currentStep() {
-    if (glitchApp.data.set_settings) {
+    if (Cookies.get('set_settings')) {
       return 'six'
-    } else if (glitchApp.data.upload_data) {
+    } else if (Cookies.get('upload_data')) {
       return 'five'
-    } else if (glitchApp.data.data_structure) {
+    } else if (Cookies.get('data_structure')) {
       return 'four'
-    } else if (glitchApp.data.algolia_env) {
+    } else if (Cookies.get('algolia_env')) {
       return 'three'
-    } else if (glitchApp.data.new_domain) {
+    } else if (Cookies.get('new_domain')) {
       return 'two'
     } else {
       return 'one'
@@ -58,7 +56,7 @@ $(document).ready(function() {
   $('#step-4-btn').click(function(event) {
       event.preventDefault();
       $.post('/upload-data', function(resp) {
-        glitchApp.data.upload_data = true
+        Cookies.set("upload_data", true);
         applyClasses()
         
       });
@@ -68,7 +66,7 @@ $(document).ready(function() {
   $('#step-5-btn').click(function(event) {
       event.preventDefault();
       $.post('/configure-index', function(resp) {
-        glitchApp.data.set_settings = true
+        Cookies.set("set_settings", true);
         applyClasses()
         
       });
