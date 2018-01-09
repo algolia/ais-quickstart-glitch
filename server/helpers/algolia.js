@@ -137,7 +137,6 @@ function checkDataStructure(data_url){
   .then(function(response){
     console.log("＼(＾▽＾)／ 🔎 Sample of data: ")
     console.log(response.data[0]);
-    return true
   })
   .catch(function(error) {
     console.log(error)
