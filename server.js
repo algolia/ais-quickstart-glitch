@@ -5,6 +5,7 @@ const nunjucks = require('nunjucks')
 const algoliaHelper = require('./server/helpers/algolia');
 
 const dataUrl = "https://raw.githubusercontent.com/algolia/datasets/master/movies/actors.json"
+//const dataUrl =""
 
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
@@ -27,7 +28,7 @@ app.get('/search', (request, response) => {
 
 // check data structure via button in UI and in console logs
 app.post('/check-data', (request, response) => {
-  algoliaHelper.checkDataStructure(dataUrl).then(() => {
+  algoliaHelper.logDataStructure(dataUrl).then(() => {
     response.sendStatus(200)
   })
 });
@@ -89,7 +90,7 @@ function checkAlgoliaEnvKeys() {
 
 // check if user has viewed data structure
 function checkDataStructure(){
-  if (algoliaHelper.checkDataStructure() === true) {
+  if (algoliaHelper.logDataStructure(dataUrl) == true) {
     return true
   } else {
     console.warn("checkData has not been called yet")
