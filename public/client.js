@@ -48,6 +48,7 @@ $(document).ready(function() {
   $('#step-3-btn').click(function(event) {
       event.preventDefault();
       $.post('/check-data', function(resp) {
+        Cookies.set("data_structure", true);
         applyClasses()
       });
       // $(this).addClass("disabled", 500, "easeOutBounce" );
