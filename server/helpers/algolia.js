@@ -107,23 +107,23 @@ function dataToAlgoliaObject(data_points){
 
 function configureAlgoliaIndex(){
   // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
-  console.log("setSettings with Algolia")
-  algoliaIndex.setSettings({
-    searchableAttributes: [
-      'name'
-    ],
-    attributesToHighlight: [
-      'name'
-    ],
-    customRanking: [
-      'desc(rating)'
-    ],
-    attributesToRetrieve: [
-      'name', 
-      'rating',
-      'image_path'
-    ]
-  });
+  // console.log("setSettings with Algolia")
+  // algoliaIndex.setSettings({
+  //   searchableAttributes: [
+  //     'name'
+  //   ],
+  //   attributesToHighlight: [
+  //     'name'
+  //   ],
+  //   customRanking: [
+  //     'desc(rating)'
+  //   ],
+  //   attributesToRetrieve: [
+  //     'name', 
+  //     'rating',
+  //     'image_path'
+  //   ]
+  // });
 }
 
 function sendDataToAlgolia(algoliaObjects){
