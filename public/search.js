@@ -2,17 +2,17 @@ $(document).ready(function() {
   var instantsearch = window.instantsearch;
 
   // create an instantsearch instance with our app id and api key
-  var search = instantsearch({
-    appId: window.glitchApp.algolia.app_id,
-    apiKey: window.glitchApp.algolia.search_api_key,
-    indexName: window.glitchApp.algolia.index_name,
-    urlSync: true,
-    searchParameters: {
-      hitsPerPage: 3
-    }
-  });
+    var search = instantsearch({
+      appId: Cookies.get('app_id'),
+      apiKey: Cookies.get('search_api_key'),
+      indexName: Cookies.get('index_name'),
+      urlSync: true,
+      searchParameters: {
+        hitsPerPage: 3
+      }
+    });
 
-// //conects the search input on your page to Algolia
+//conects the search input on your page to Algolia
 // search.addWidget(
 //   instantsearch.widgets.searchBox({
 //     container: '#search-box',
@@ -56,5 +56,5 @@ $(document).ready(function() {
 //     })
 //   );
 
-//   search.start();
+  search.start();
 });
