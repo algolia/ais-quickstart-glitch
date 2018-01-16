@@ -13,7 +13,7 @@ We have instructions on the homepage and some friends throughout the code base h
 Visit homepage for remixing instructions!
 ------------
 We recommend splitting your screen and using one tab for code and your console and the other for following along at the homepage.
-![remixing-screenshot](https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202017-12-13%20at%209.49.53%20AM.png?1513187611035)
+![remixing-screenshot](https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fsample_app_screenshot.png?1516112904824)
 
 Made by your friends at [Algolia](https://algolia.com/)
 ------------
