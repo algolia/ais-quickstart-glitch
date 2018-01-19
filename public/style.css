@@ -12,6 +12,10 @@ body {
   /*font-family: 'Pangolin', cursive;*/
 }
 
+.steps {
+  padding-top: 50px;
+}
+
 #remix {
   font-family: 'Press Start 2P', cursive;
   text-align: center;

@@ -106,7 +106,7 @@ function dataToAlgoliaObject(data_points){
 // ignorePlurals: make plural and singular matches count the same for languages you specify
 
 function configureAlgoliaIndex(){
-  // *＼(＾▽＾)／ 🔎 Step 3b: Comment in the lines for which settings you want to use
+  // *＼(＾▽＾)／ 🔎 Step 3b: Uncomment all lines under setSettings for this tutorial. (110-126)
   // console.log("setSettings with Algolia")
   // algoliaIndex.setSettings({
   //   searchableAttributes: [

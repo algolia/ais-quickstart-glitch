@@ -2,19 +2,19 @@
 <html>
   {% include "partials/header.html" %}
   <body class="fill-titan">
-      <div class="container">
-        <div class="col-md-12">
-          <div class="col-md-6">
-            <span style="padding: 300px"></span>
-            <h2 id="welcome">Algolia Quickstart</h2>
-            <p class="lead">Algolia is a search API that helps you add a search bar to websites and applications. In this tutorial you will build an Algolia search step-by-step starting with indexing and ending with search. In just 5 minutes, you'll have learned how search works and have a place to search your favorite actors.</p>
-          </div>
-          <div class="col-md-6">
-            <span class="spacer8"></span>
-            <h3 id="welcome">Check out what we will build!</h3>
-            <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fezgif.com-gif-maker.gif?1514128983358" style="width: 475px; height:300px">
-          </div>
+    <div class="container">
+      <div class="col-md-12">
+        <div class="col-md-6">
+          <span style="padding: 300px"></span>
+          <h2 id="welcome">Algolia Quickstart</h2>
+          <p class="lead">Algolia is a search API that helps you add a search bar to websites and applications. In this tutorial you will build an Algolia search step-by-step starting with indexing and ending with search. In just 5 minutes, you'll have learned how search works and have a place to search your favorite actors.</p>
         </div>
+        <div class="col-md-6">
+          <span class="spacer8"></span>
+          <h3 id="welcome">Check out what we will build!</h3>
+          <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2Fezgif.com-gif-maker.gif?1514128983358" style="width: 475px; height:300px">
+        </div>
+      </div>
     </div>
 
     <div class="row">
@@ -23,10 +23,10 @@
         <h2 style="text-align: center;"> 😎 Welcome! We are so happy you are here! Try Algolia in 6 simple steps 👯‍</h2>
         <hr style="width: 80%"></hr>
         <ul>
-          <li id="step-0">
+          <li id="step-0" class="steps">
             🐣 <strong>Prep Work</strong>: To set yourself up for success, we recommend doing this two things before getting started!
-            <p class="detailed-steps">
-              <div class="col-md-12">
+            <div class="detailed-steps">
+              <div class="col-md-12" style="padding-bottom:50px">
                 <div class="col-md-7">
                   <p class="detailed-steps">
                   Split your screen to have the code on one side and your browser on the other.    
@@ -40,75 +40,97 @@
                   <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202018-01-16%20at%203.23.13%20PM.png?1516112904104" style="width: 300px; height: 250px"/>    
                 </div>
               </div>
-            </p>
+            </div>
           </li>
-          <li id="step-1">
+          <li id="step-1" class="steps">
             🎏 <strong>Step 1: Remix this app</strong> 
-            <p class="detailed-steps">
-              Click this button, which creates your own live copy of this app that you modify and extend right in your browser. 
-            </p>
-            <a href="https://glitch.com/edit/#!/remix/algolia-quickstart"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="float: left"></a>
+            <div class="detailed-steps">
+              Click this button, which creates your own live copy of this app that you modify and extend right in your browser. You'll want to follow along with your remixed version for this tutorial. Upon success, you'll see a new url for your project and this step should be crossed out.
+            </div>
+            <a href="https://glitch.com/edit/#!/remix/algolia-quickstart" target="_blank"><img src="https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg" alt="Remix on Glitch" style="float: left"></a>
           </li>
           
-          <li id="step-2" style="padding-top: 40px">
+          <li id="step-2" class="steps">
             🔑 <strong>Step 2: Get your Algolia API keys</strong>
-            <p class="detailed-steps">
-              Start by creating an account at <a href="https://www.algolia.com/cc/glitch"> Algolia </a>. Then grab your credentails from your <a href="https://www.algolia.com/licensing">dashboard</a>. You'll want to copy your <code>App Id</code>, <code> Search Only API Key</code> and <code>Admin API Key</code>.
-              </br>
-              Once this is complete, add them to your <code>.env file</code> so that this quickstart app knows how to connect to your Algolia application and index.
-              <div class="col-md-12">
-                <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FalgoliaAPIkeysMarkedUp.png?1514567735627" style="height:500px; float:left"/>  
+            <div class="detailed-steps">
+              Start by creating an account at <a href="https://www.algolia.com/cc/glitch"> Algolia </a>. Then grab your credentails from your <a href="https://www.algolia.com/licensing">dashboard</a>. You'll want to copy the following values and map them to your ENV file.
+              <div class="row">
+                <code>Application ID</code> goes with <code>ALGOLIA_APP_ID</code>
               </div>
-            </p>
+              <div class="row">
+                <code>Search-Only API Key</code> goes with <code>ALGOLIA_SEARCH_API_KEY</code>
+              </div>
+              <div class="row">
+                <code>Admin API Key</code> goes with <code>ALGOLIA_ADMIN_API_KEY</code>
+              </div>
+              Once this is complete, add these values to your <code>.env file</code> so that this quickstart app knows how to connect to your Algolia application and index.
+              <div class="col-md-12">
+                <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FalgoliaAPIkeysMarkedUp.png?1514567735627" style="height:500px; float:left; padding-bottom:50px"/>  
+              </div>
+            </div>
           </li>
           
-          <li id="step-3">
+          <li id="step-3" class="steps">
             🗃 <strong>Step 3: Prepare JSON data for Algolia</strong>
-            <p class="detailed-steps">
+            <div class="detailed-steps">
               We need to create an index with Algolia with some data we want to search. We've supplied this URL for you, which you can see on <strong>line 7</strong> in your <code>server.js</code> file at the root of your project, a constant named <code>dataUrl</code>. 
-            </br>
-              If you haven't already, now is a good time to split your screens to see your Glitch preview in one screen and your code in another.
-              For these next few steps we want to have the console logs showing while you are working with the app. 
-              This step we will see a preview of what our data looks like in our console by curling a URL. You should see this in your logs:
-              <div class="col-md-12"><img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202017-12-29%20at%2011.44.57%20AM.png?1514573142822" style="width:350px; height 300px; float: left"/></div>
-            </br>
-            </p>
+              <div class="row">
+                If you haven't already, now is a good time to split your screens to see your Glitch preview in one screen and your code in another.
+              </div>
+              <div class="row">
+                For these next few steps we want to have the console logs showing while you are working with the app. You can view logs by clicking "logs" above your file structure.
+              </div>
+              <div class="row">
+                <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202017-12-29%20at%2011.44.57%20AM.png?1514573142822" style="width:350px; height 300px; float: left"/>
+              </div>
+              <div class="row">
+                This step we will see a preview of what our data looks like in our console by curling a URL. You should see this in your logs:
+              </div>
+              <div class="row">
+                <img src="https://cdn.glitch.com/45e6d35c-2e10-4020-8ad3-d5f1b9d3aae6%2FScreen%20Shot%202017-12-29%20at%2011.44.57%20AM.png?1514573142822" style="width:350px; height 300px; float: left"/>
+              </div>
+            </div>
             <a href="/check-data" id="step-3-btn" class="btn btn-static-secondary">Check data structure</a>
           </li>
           
-          <li id="step-4">
+          <li id="step-4" class="steps">
             ☁️ <strong>Step 4: Upload data to Algolia index</strong>
-            <p class="detailed-steps">
-              Go to <code>server/helpers/algolia.js</code> and look at the <code>indexData()</code> function where we pass the url that we just checked in Step 3. 
-              Here we are calling another function <code>dataToAlgoliaObject()</code> that will loop through each data point and create objects to send to Algolia.
-              </br>
-              </br>
-              <strong>Important:</strong> Comment in the <code>objectID: data_point.objectID</code> on line 75 before uploading data.
-            </p>
+            <div class="detailed-steps">
+              Go to <code>server/helpers/algolia.js</code> on line 65 and look at the <code>indexData</code> function where we pass the url that we just checked in Step 3. 
+              Here we are calling another function <code>dataToAlgoliaObject</code> that will loop through each data point and create objects to send to Algolia.
+              
+              <div class="row">
+                <strong>Important:</strong> Comment in the <code>objectID: data_point.objectID</code> on line 75 before uploading data.
+              </div>
+            </div>
             <a href="/upload-data" id="step-4-btn" class="btn btn-static-secondary">Upload data</a>
           </li>
           
-          <li id="step-5">
+          <li id="step-5" class="steps">
             🛠 <strong>Step 5: Configure index to be searched</strong>
-            <p class="detailed-steps">
-              Go to <code>server/helpers/algolia.js</code> and comment in the settings under the <code>configureAlgoliaIndex</code> function.
-              Here you can read about which settings we are enabling for the index we just created and other options you have available!
-              </br>
-              </br>
-              <strong>Important:</strong> Comment in the code under the <code>setSettings</code> on lines 118-131 before configuring index.
-            </p>
+            <div class="detailed-steps">
+              <div class="row">
+                Go to <code>server/helpers/algolia.js</code> line 108 and uncomment the settings under the <code>configureAlgoliaIndex</code> function.
+                Here you can read about which settings we are enabling for the index we just created and other options you have available!
+              </div>
+              <div class="row">
+                <strong>Important:</strong> Comment in the code under the <code>setSettings</code> on lines 110-126 before configuring index.
+              </div>
+            </div>
             <a href="/configure-index" id="step-5-btn" class="btn btn-static-secondary">Configure Index</a>
           </li>
           
-          <li id="step-6">
+          <li id="step-6" class="steps">
             ✨ <strong>Step 6: Add search widgets to UI</strong>
-            <p class="detailed-steps">
-              Go to <code>public/search.js</code> and comment in the <code>widgets.searchBox</code> and <code>widgets.hits</code>
-              Here we are telling the client side what kind of widgets we want to enable for our user to see the data we have just indexed and configured settings for.
-              </br>
-              </br>
-              <strong>Important:</strong> Comment in the code for <code>widgets</code> on lines 16-59 before viewing your data.
-            </p>
+            <div class="detailed-steps">
+              <div class="row">
+                Go to <code>public/search.js</code> and comment in the <code>widgets.searchBox</code> and <code>widgets.hits</code>
+                Here we are telling the client side what kind of widgets we want to enable for our user to see the data we have just indexed and configured settings for.
+              </div>
+              <div class="row">
+                <strong>Important:</strong> Comment in the code for <code>widgets</code> on lines 16-59 before viewing your data.
+              </div>
+            </div>
             <a href="/search" id="step-6-btn" class="btn btn-static-secondary">View your data</a>
           </li>
         </ul>
@@ -124,7 +146,7 @@
         <h1 class="display-3" id="remix">What's next?</h1>
         <ul>
           <li style="text-align: center">🕵️ Learn about more options; add more configuration</li>
-          <li style="text-align: center">🙋 Share with us that you completed the tutorial! <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I just finished the tutorial to learn Algolia! 🕵️‍ Remix on @glitch to try it out yourself 🎏">Twitter</a></li>
+          <li style="text-align: center">🙋 Share with us that you completed the tutorial! <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=I just finished the tutorial to learn Algolia! 🕵️‍ Remix on @glitch to try it out yourself 🎏. https://algolia-quickstart.glitch.me">Twitter</a></li>
           <li style="text-align: center">💜 Check out some of our favorite <a href="https://www.glitch.com/algolia">Glitch</a> apps</li>
         </ul>
         <hr style="width: 80%"></hr>
